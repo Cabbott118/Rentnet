@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
 
 // Redux
 import { connect } from 'react-redux';
@@ -28,6 +29,9 @@ const styles = (theme) => ({
     marginTop: 10,
     marginBottom: 10,
   },
+  errorText: {
+    marginTop: '1rem',
+  },
   progressSpinner: {
     position: 'absolute',
   },
@@ -41,7 +45,7 @@ class Register extends Component {
     email: '',
     password: '',
     confirm_password: '',
-    errors: {},
+    msg: null,
   };
 
   handleOpen = () => {
@@ -68,12 +72,14 @@ class Register extends Component {
       password,
       confirm_password,
     } = this.state;
+
     const newUser = {
       first_name,
       last_name,
       email,
       password,
     };
+
     if (password === confirm_password) {
       this.props.register(newUser);
     } else {
@@ -81,8 +87,29 @@ class Register extends Component {
     }
   };
 
+  componentDidUpdate(prevProps) {
+    const { error, isAuthenticated } = this.props;
+    if (error !== prevProps.error) {
+      // Check for login error
+      if (error.id === 'REGISTER_FAIL') {
+        this.setState({ msg: error.msg.msg });
+      } else {
+        this.setState({ msg: null });
+      }
+    }
+
+    // If authenticated, close modal
+    if (this.state.modal) {
+      if (isAuthenticated) {
+        this.toggle();
+      }
+    }
+  }
+
   render() {
     const { classes } = this.props;
+    const { msg } = this.state;
+
     return (
       <Fragment>
         <Button
@@ -155,6 +182,15 @@ class Register extends Component {
               >
                 Register
               </Button>
+              {msg === null ? null : (
+                <Typography
+                  variant='subtitle2'
+                  color='error'
+                  className={classes.errorText}
+                >
+                  {msg}
+                </Typography>
+              )}
             </form>
           </DialogContent>
         </Dialog>
