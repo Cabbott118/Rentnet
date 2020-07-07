@@ -55,7 +55,7 @@ export class MainContent extends Component {
             <Typography variant='h6' style={header}>
               Why Choose Us?
             </Typography>
-            <Typography variant='body2' color='textSecondary' style={body}>
+            <Typography variant='body1' color='textSecondary' style={body}>
               Whether you're looking to rent, or list your personal trailer to
               earn some additional income, Rent-Net is the right place for you.
               Avoid the headache of going through a large company to rent
@@ -76,7 +76,7 @@ export class MainContent extends Component {
             <Typography variant='h6' style={header}>
               How This Works
             </Typography>
-            <Typography variant='body2' color='textSecondary' style={body}>
+            <Typography variant='body1' color='textSecondary' style={body}>
               You can browse the site as much as you like without commiting to
               anything, but of course to rent and list, you will need to
               register an account with us. Once an account is registered, you

@@ -6,9 +6,13 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 // Pages and Components
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Account from './pages/Account';
-import Navbar from './components/Navbar';
+import MyListings from './pages/MyListings';
+import HostInfo from './pages/HostInfo';
+import Listings from './pages/Listings';
+import AboutUs from './pages/AboutUs';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -36,6 +40,10 @@ class App extends Component {
             <div className='App'>
               <Route exact path='/' component={Home} />
               <Route exact path='/account' component={Account} />
+              <Route exact path='/mylistings' component={MyListings} />
+              <Route exact path='/hostinfo' component={HostInfo} />
+              <Route exact path='/listings' component={Listings} />
+              <Route exact path='/aboutus' component={AboutUs} />
             </div>
           </Router>
         </Provider>

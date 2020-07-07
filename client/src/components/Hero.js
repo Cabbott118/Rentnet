@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 
@@ -59,6 +60,8 @@ export class Hero extends Component {
                 color='primary'
                 variant='contained'
                 className={classes.button}
+                component={Link}
+                to='/aboutus'
               >
                 About Us
               </Button>
@@ -66,6 +69,8 @@ export class Hero extends Component {
                 color='primary'
                 variant='contained'
                 className={classes.button}
+                component={Link}
+                to='/listings'
               >
                 Search Trailers
               </Button>

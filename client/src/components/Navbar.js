@@ -47,16 +47,6 @@ export class Navbar extends Component {
               Logo
             </Button>
             <div style={{ marginLeft: 'auto' }}>
-              <Fragment>
-                {/* <Button
-                  color='inherit'
-                  className={classes.button}
-                  component={Link}
-                  to='/'
-                >
-                  Home
-                </Button> */}
-              </Fragment>
               {isAuthenticated ? (
                 <Fragment>
                   <Button
