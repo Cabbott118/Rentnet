@@ -5,9 +5,6 @@ import PropTypes from 'prop-types';
 // Util
 import undraw from '../utility/images/undraw_best_place_r685.png';
 
-// Components
-import LocationSearch from './/LocationSearch';
-
 // MUI
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';

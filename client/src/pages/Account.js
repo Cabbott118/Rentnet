@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 // MUI
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 // Components
@@ -16,6 +15,10 @@ import { loadUser } from '../redux/actions/authActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
+  container: {
+    padding: '2rem',
+    borderBottom: '1px solid #ececec',
+  },
 });
 
 export class Account extends Component {
@@ -38,13 +41,15 @@ export class Account extends Component {
     }
 
     return (
-      <Container className={classes.container}>
-        <Typography variant='h6'>Account Page for:</Typography>
-        <Typography variant='h6'>
-          {user.first_name} {user.last_name}
-        </Typography>
-        <Logout />
-      </Container>
+      <Fragment>
+        <Container className={classes.container}>
+          <Typography variant='h4'>Welcome, {user.first_name}!</Typography>
+          <Typography variant='h6'>{user.email}</Typography>
+        </Container>
+        <Container>
+          <Logout />
+        </Container>
+      </Fragment>
     );
   }
 }
