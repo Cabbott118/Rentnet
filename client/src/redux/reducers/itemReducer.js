@@ -1,6 +1,6 @@
 import {
   GET_ITEMS,
-  SEARCH_ITEMS,
+  GET_FILTERED_ITEMS,
   ADD_ITEM,
   EDIT_ITEM,
   DELETE_ITEM,
@@ -23,12 +23,11 @@ export default function (state = initialState, action) {
         loading: false,
       };
 
-    case SEARCH_ITEMS:
+    case GET_FILTERED_ITEMS:
       return {
         ...state,
-        items: state.items.filter(
-          (item) => item.item_location !== action.payload
-        ),
+        filtered_results: action.payload,
+        loading: false,
       };
 
     case ADD_ITEM:

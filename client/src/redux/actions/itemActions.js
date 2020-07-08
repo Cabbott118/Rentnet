@@ -2,6 +2,7 @@
 import axios from 'axios';
 import {
   GET_ITEMS,
+  GET_FILTERED_ITEMS,
   SEARCH_ITEMS,
   ADD_ITEM,
   EDIT_ITEM,
@@ -28,13 +29,13 @@ export const getItems = () => (dispatch) => {
 };
 
 // Go to itemReducer and check type
-export const searchItems = (searchCriteria) => (dispatch) => {
+export const getFilteredItems = (data) => (dispatch) => {
   dispatch(setItemsLoading());
   axios // Proxy giving ability to shorten endpoint
-    .get(`/api/items/${searchCriteria}`)
+    .get(`/api/items/${data}`)
     .then((res) =>
       dispatch({
-        type: SEARCH_ITEMS,
+        type: GET_FILTERED_ITEMS,
         payload: res.data,
       })
     )
