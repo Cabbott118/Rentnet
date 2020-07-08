@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 
@@ -24,7 +24,7 @@ import LoadingSpinner from './LoadingSpinner';
 // Redux
 import { connect } from 'react-redux';
 import { loadUser } from '../redux/actions/authActions';
-import { getItems, searchItems } from '../redux/actions/itemActions';
+import { getItems } from '../redux/actions/itemActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -112,6 +112,7 @@ export class TrailerCard extends Component {
   state = {
     open: false,
     id: '',
+    trailer: {},
   };
 
   componentDidMount() {
@@ -120,6 +121,17 @@ export class TrailerCard extends Component {
   }
 
   handleOpenClick = (id) => {
+    const {
+      item: { items },
+    } = this.props;
+    for (let i = 0; i < items.length; i++) {
+      if (id === items[i]._id) {
+        this.setState({
+          trailer: items[i],
+        });
+      }
+    }
+
     this.setState({
       open: true,
       id,
@@ -134,11 +146,20 @@ export class TrailerCard extends Component {
   };
 
   render() {
-    console.log(this.state);
     const {
       classes,
       item: { items, loading },
     } = this.props;
+
+    const {
+      brand,
+      date,
+      deck_dimensions,
+      price,
+      trailer_type,
+      weight,
+      item_location,
+    } = this.state.trailer;
 
     if (loading) {
       return <LoadingSpinner loading={loading} />;
@@ -213,8 +234,12 @@ export class TrailerCard extends Component {
               >
                 <CloseIcon />
               </IconButton>
-              <Typography variant='h6' className={classes.title}>
-                {}
+              <Typography
+                variant='h6'
+                color='secondary'
+                className={classes.title}
+              >
+                {trailer_type} Trailer in {item_location}
               </Typography>
               <Button
                 autoFocus
@@ -229,7 +254,23 @@ export class TrailerCard extends Component {
           </AppBar>
           <Container>
             <Typography variant='h6' color='textSecondary' align='center'>
-              Additional Trailer Information will be accessible here.
+              {brand}
+            </Typography>
+
+            <Typography variant='h6' color='textSecondary' align='center'>
+              {deck_dimensions}
+            </Typography>
+
+            <Typography variant='h6' color='textSecondary' align='center'>
+              Capacity of {weight} lbs
+            </Typography>
+
+            <Typography variant='h6' color='textSecondary' align='center'>
+              ${price}/Day
+            </Typography>
+
+            <Typography variant='h6' color='textSecondary' align='center'>
+              {date}
             </Typography>
           </Container>
         </Dialog>

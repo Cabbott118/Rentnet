@@ -3,7 +3,6 @@ import axios from 'axios';
 import {
   GET_ITEMS,
   GET_FILTERED_ITEMS,
-  SEARCH_ITEMS,
   ADD_ITEM,
   EDIT_ITEM,
   DELETE_ITEM,

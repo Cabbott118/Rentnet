@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+// import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 
@@ -25,7 +25,6 @@ const styles = (theme) => ({
     marginBottom: '1rem',
   },
   map: {
-    position: '-webkit-sticky',
     position: 'sticky',
     top: 50,
   },
