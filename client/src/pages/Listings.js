@@ -27,11 +27,12 @@ const styles = (theme) => ({
   root: {
     flexGrow: 1,
     margin: '1rem',
+    width: '100%',
   },
   paper: {
     padding: '.8rem',
     margin: 'auto',
-    minWidth: 500,
+    // minWidth: 350,
   },
   image: {
     width: 128,
@@ -73,7 +74,7 @@ export class Listings extends Component {
               deck_dimensions,
               price,
             }) => (
-              <div key={_id} className={classes.root}>
+              <Grid key={_id} item sm={12} md={6} className={classes.root}>
                 <Paper className={classes.paper}>
                   <Grid container spacing={2}>
                     <Grid item>
@@ -116,7 +117,7 @@ export class Listings extends Component {
                     </Grid>
                   </Grid>
                 </Paper>
-              </div>
+              </Grid>
             )
           )}
         </Fragment>
