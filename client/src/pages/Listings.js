@@ -22,27 +22,80 @@ import { getItems, searchItems } from '../redux/actions/itemActions';
 const styles = (theme) => ({
   ...theme.spreadThis,
   container: {
-    padding: '2rem',
+    padding: '1.5rem',
   },
   root: {
-    flexGrow: 1,
-    margin: '1rem',
+    display: 'flex',
+    flexWrap: 'wrap',
+    minWidth: 300,
     width: '100%',
   },
-  paper: {
-    padding: '.8rem',
-    margin: 'auto',
-    // minWidth: 350,
-  },
   image: {
-    width: 128,
-    height: 128,
+    margin: '1rem',
+    position: 'relative',
+    height: 200,
+    [theme.breakpoints.down('xs')]: {
+      width: '90% !important', // Overrides inline-style
+      height: 150,
+    },
+    '&:hover, &$focusVisible': {
+      zIndex: 1,
+      '& $imageBackdrop': {
+        opacity: 0.15,
+      },
+      '& $imageMarked': {
+        opacity: 0,
+      },
+      '& $imageTitle': {
+        border: '4px solid currentColor',
+      },
+    },
   },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
+  focusVisible: {},
+  imageButton: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: theme.palette.common.white,
+  },
+  imageSrc: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center 40%',
+  },
+  imageBackdrop: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: theme.palette.common.black,
+    opacity: 0.4,
+    transition: theme.transitions.create('opacity'),
+  },
+  imageTitle: {
+    position: 'relative',
+    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${
+      theme.spacing(1) + 6
+    }px`,
+  },
+  imageMarked: {
+    height: 3,
+    width: 18,
+    backgroundColor: theme.palette.common.white,
+    position: 'absolute',
+    bottom: -2,
+    left: 'calc(50% - 9px)',
+    transition: theme.transitions.create('opacity'),
   },
 });
 
@@ -74,49 +127,35 @@ export class Listings extends Component {
               deck_dimensions,
               price,
             }) => (
-              <Grid key={_id} item sm={12} md={6} className={classes.root}>
-                <Paper className={classes.paper}>
-                  <Grid container spacing={2}>
-                    <Grid item>
-                      <ButtonBase className={classes.image}>
-                        <img
-                          className={classes.img}
-                          alt='Trailer'
-                          src='https://via.placeholder.com/250x150'
-                        />
-                      </ButtonBase>
-                    </Grid>
-                    <Grid item xs={12} sm container>
-                      <Grid item xs container direction='column' spacing={2}>
-                        <Grid item xs>
-                          <Typography gutterBottom variant='subtitle1'>
-                            {trailer_type} Trailer
-                          </Typography>
-                          <Typography variant='body2' color='textSecondary'>
-                            {brand}
-                          </Typography>
-                          <Typography
-                            variant='body2'
-                            color='primary'
-                            gutterBottom
-                          >
-                            {item_location}
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <Button variant='outlined' color='primary'>
-                            Rent
-                          </Button>
-                        </Grid>
-                      </Grid>
-                      <Grid item>
-                        <Typography variant='subtitle1'>
-                          ${price}/Day
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Paper>
+              <Grid item xs={12} sm={12} md={6} key={_id}>
+                <ButtonBase
+                  focusRipple
+                  className={classes.image}
+                  focusVisibleClassName={classes.focusVisible}
+                  style={{
+                    width: '300px',
+                  }}
+                >
+                  <span
+                    className={classes.imageSrc}
+                    style={{
+                      backgroundImage:
+                        'url(https://via.placeholder.com/250x150)',
+                    }}
+                  />
+                  <span className={classes.imageBackdrop} />
+                  <span className={classes.imageButton}>
+                    <Typography
+                      component='span'
+                      variant='subtitle1'
+                      color='inherit'
+                      className={classes.imageTitle}
+                    >
+                      {trailer_type}
+                      <span className={classes.imageMarked} />
+                    </Typography>
+                  </span>
+                </ButtonBase>
               </Grid>
             )
           )}
@@ -125,12 +164,7 @@ export class Listings extends Component {
 
       return (
         <Container className={classes.container}>
-          <Grid
-            container
-            direction='column'
-            justify='center'
-            alignItems='flex-start'
-          >
+          <Grid container direction='column' className={classes.root}>
             {listings}
           </Grid>
         </Container>
