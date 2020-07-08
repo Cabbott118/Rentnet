@@ -41,7 +41,6 @@ export class Account extends Component {
       classes,
       auth: { user, isLoading },
     } = this.props;
-
     if (!user) {
       return <LoadingSpinner loading={isLoading} />;
     } else {

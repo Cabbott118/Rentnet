@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleBackdrop(props) {
+export default function LoadingSpinner(props) {
   const classes = useStyles();
 
   return (

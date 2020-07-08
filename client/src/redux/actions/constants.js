@@ -15,8 +15,3 @@ export const EDIT_USER = 'EDIT_USER';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const GET_ERRORS = 'GET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
-
-// UI Reducer specific
-export const LOADING_UI = 'LOADING_UI';
-export const STOP_LOADING_UI = 'STOP_LOADING_UI';
-export const SET_ERRORS = 'SET_ERRORS';
