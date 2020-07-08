@@ -24,6 +24,11 @@ const styles = (theme) => ({
   searchGrid: {
     marginBottom: '1rem',
   },
+  map: {
+    position: '-webkit-sticky',
+    position: 'sticky',
+    top: 50,
+  },
 });
 
 export class Listings extends Component {
@@ -57,7 +62,7 @@ export class Listings extends Component {
             <TrailerCard />
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} className={classes.map}>
             <MapContainer />
           </Grid>
         </Grid>

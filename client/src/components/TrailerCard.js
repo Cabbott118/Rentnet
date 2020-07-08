@@ -7,6 +7,16 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
+import Container from '@material-ui/core/Container';
+
+// MUI Dialog Specific
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
 
 // Components
 import LoadingSpinner from './LoadingSpinner';
@@ -18,6 +28,13 @@ import { getItems, searchItems } from '../redux/actions/itemActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
+  appBar: {
+    position: 'relative',
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
   image: {
     margin: '1rem',
     position: 'relative',
@@ -87,13 +104,37 @@ const styles = (theme) => ({
   },
 });
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction='up' ref={ref} {...props} />;
+});
+
 export class TrailerCard extends Component {
+  state = {
+    open: false,
+    id: '',
+  };
+
   componentDidMount() {
     this.props.loadUser();
     this.props.getItems();
   }
 
+  handleOpenClick = (id) => {
+    this.setState({
+      open: true,
+      id,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      open: false,
+      id: '',
+    });
+  };
+
   render() {
+    console.log(this.state);
     const {
       classes,
       item: { items, loading },
@@ -120,6 +161,7 @@ export class TrailerCard extends Component {
                 focusRipple
                 className={classes.image}
                 focusVisibleClassName={classes.focusVisible}
+                onClick={this.handleOpenClick.bind(this, _id)}
                 style={{
                   width: '300px',
                 }}
@@ -134,7 +176,7 @@ export class TrailerCard extends Component {
                 <span className={classes.imageButton}>
                   <Typography
                     component='span'
-                    variant='subtitle1'
+                    variant='h6'
                     color='inherit'
                     className={classes.imageTitle}
                   >
@@ -149,7 +191,50 @@ export class TrailerCard extends Component {
       </Grid>
     );
 
-    return <Fragment>{listings}</Fragment>;
+    return (
+      <Fragment>
+        {listings}
+
+        {/* Dialog only appears when a trailer is clicked. ID is passed through onOpenClick handler */}
+
+        <Dialog
+          fullScreen
+          open={this.state.open}
+          onClose={this.handleClose}
+          TransitionComponent={Transition}
+        >
+          <AppBar className={classes.appBar}>
+            <Toolbar>
+              <IconButton
+                edge='start'
+                color='secondary'
+                onClick={this.handleClose}
+                aria-label='close'
+              >
+                <CloseIcon />
+              </IconButton>
+              <Typography variant='h6' className={classes.title}>
+                {}
+              </Typography>
+              <Button
+                autoFocus
+                color='secondary'
+                variant='outlined'
+                className={classes.button}
+                onClick={this.handleClose}
+              >
+                Rent Trailer
+              </Button>
+            </Toolbar>
+          </AppBar>
+          <Container>
+            <Typography variant='h6' color='textSecondary' align='center'>
+              Additional Trailer Information will be accessible here.
+            </Typography>
+          </Container>
+        </Dialog>
+      </Fragment>
+    );
   }
 }
 
