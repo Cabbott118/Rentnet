@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Typography from '@material-ui/core/Typography';
+import Alert from '@material-ui/lab/Alert';
 
 // Redux
 import { connect } from 'react-redux';
@@ -108,6 +108,7 @@ class Login extends Component {
         >
           <DialogTitle>Login</DialogTitle>
           <DialogContent>
+            {msg === null ? null : <Alert severity='error'>{msg}</Alert>}
             <form onSubmit={this.handleSubmit}>
               <TextField
                 name='email'
@@ -135,15 +136,6 @@ class Login extends Component {
               >
                 Login
               </Button>
-              {msg === null ? null : (
-                <Typography
-                  variant='subtitle2'
-                  color='error'
-                  className={classes.errorText}
-                >
-                  {msg}
-                </Typography>
-              )}
             </form>
           </DialogContent>
         </Dialog>
