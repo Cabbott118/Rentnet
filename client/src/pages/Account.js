@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 // Components
 import Logout from '../components/auth/Logout';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 // Redux
 import { connect } from 'react-redux';
@@ -38,54 +39,50 @@ export class Account extends Component {
   render() {
     const {
       classes,
-      auth: { user },
+      auth: { user, isLoading },
     } = this.props;
 
     if (!user) {
+      return <LoadingSpinner loading={isLoading} />;
+    } else {
       return (
-        <Container className={classes.container}>
-          <Typography variant='h6'>Loading...</Typography>
-        </Container>
+        <Fragment>
+          <Container className={classes.container}>
+            <Typography variant='h4'>Welcome, {user.first_name}!</Typography>
+            <Typography variant='h6'>{user.email}</Typography>
+            {user.is_admin ? (
+              <Typography variant='body2'>Admin Account</Typography>
+            ) : null}
+          </Container>
+          {/* BELOW THE BREAK */}
+          <Container className={classes.container}>
+            <div>
+              {user.is_host ? (
+                <Button
+                  variant='contained'
+                  color='primary'
+                  className={classes.manageButton}
+                  component={Link}
+                  to='/mylistings'
+                >
+                  Manage Listings
+                </Button>
+              ) : (
+                <Typography
+                  color='primary'
+                  className={classes.hostInfoLink}
+                  component={Link}
+                  to='/hostinfo'
+                >
+                  Learn how to become a Host
+                </Typography>
+              )}
+            </div>
+            <Logout />
+          </Container>
+        </Fragment>
       );
     }
-
-    return (
-      <Fragment>
-        <Container className={classes.container}>
-          <Typography variant='h4'>Welcome, {user.first_name}!</Typography>
-          <Typography variant='h6'>{user.email}</Typography>
-          {user.is_admin ? (
-            <Typography variant='body2'>Admin Account</Typography>
-          ) : null}
-        </Container>
-        {/* BELOW THE BREAK */}
-        <Container className={classes.container}>
-          <div>
-            {user.is_host ? (
-              <Button
-                variant='contained'
-                color='primary'
-                className={classes.manageButton}
-                component={Link}
-                to='/mylistings'
-              >
-                Manage Listings
-              </Button>
-            ) : (
-              <Typography
-                color='primary'
-                className={classes.hostInfoLink}
-                component={Link}
-                to='/hostinfo'
-              >
-                Learn how to become a Host
-              </Typography>
-            )}
-          </div>
-          <Logout />
-        </Container>
-      </Fragment>
-    );
   }
 }
 
