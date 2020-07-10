@@ -1,7 +1,7 @@
 export default {
   palette: {
     primary: {
-      main: '#00B0FF',
+      main: '#FF6E3F',
     },
     secondary: {
       main: '#fff',

@@ -4,13 +4,14 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 
 // Util
-import undraw from '../utility/images/undraw_best_place_r685.png';
+// import undraw from '../utility/images/undraw_best_place_r685.png';
 
 // MUI
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 // Redux
 import { connect } from 'react-redux';
@@ -18,7 +19,7 @@ import { connect } from 'react-redux';
 const styles = (theme) => ({
   ...theme.spreadThis,
   hero: {
-    margin: '4rem auto',
+    margin: '3rem auto',
   },
   img: {
     width: '100%',
@@ -40,16 +41,37 @@ export class Hero extends Component {
         <Container>
           <Grid container direction='row' alignItems='center' spacing={2}>
             <Grid item sm={6} md={6}>
-              <Typography variant='h2' color='primary'>
+              {/* <Typography variant='h3' color='primary'>
                 Rent-Net
-              </Typography>
-              <Typography variant='h4' color='inherit'>
+              </Typography> */}
+              <Typography
+                variant='h5'
+                color='inherit'
+                style={{ marginTop: '3rem' }}
+              >
                 the modern solution for your trailer rental needs.
               </Typography>
+              <TextField
+                id='outlined-basic'
+                label='Search Trailers...'
+                variant='outlined'
+                color='secondary'
+                fullWidth
+                style={{ marginTop: '1rem' }}
+              />
+              {/* <Button
+                color='primary'
+                variant='contained'
+                className={classes.button}
+                component={Link}
+                to='/listings'
+              >
+                Search Trailers
+              </Button> */}
               <Typography
                 style={{ marginTop: '1rem' }}
                 variant='subtitle1'
-                color='textSecondary'
+                color='secondary'
               >
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
@@ -76,7 +98,7 @@ export class Hero extends Component {
               </Button>
             </Grid>
             <Grid item sm={6} md={6}>
-              <img src={undraw} alt='' className={classes.img} />
+              {/* <img src={undraw} alt='' className={classes.img} /> */}
             </Grid>
           </Grid>
         </Container>

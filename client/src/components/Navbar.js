@@ -18,6 +18,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 const styles = {
   button: {
+    fontSize: '2rem',
     textTransform: 'none',
     fontWeight: '750',
   },
@@ -37,14 +38,14 @@ export class Navbar extends Component {
     return (
       <AppBar color='inherit'>
         <Container maxWidth='lg'>
-          <Toolbar variant='dense'>
+          <Toolbar>
             <Button
               color='inherit'
               className={classes.button}
               component={Link}
               to='/'
             >
-              Logo
+              Rent-Net
             </Button>
             <div style={{ marginLeft: 'auto' }}>
               {isAuthenticated ? (
