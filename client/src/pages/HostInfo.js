@@ -36,49 +36,17 @@ const styles = (theme) => ({
     marginRight: theme.spacing(1),
     textTransform: 'none',
   },
+  utilButton: {
+    color: 'white',
+    textTransform: 'none',
+    margin: 10,
+  },
   buttonGroup: {},
-  // instructions: {
-  //   marginTop: theme.spacing(1),
-  //   marginBottom: theme.spacing(1),
-  // },
 });
 
 function getSteps() {
   return ['Step One', 'Step Two', 'Step Three'];
 }
-
-function getStepContent(stepIndex) {
-  switch (stepIndex) {
-    case 0:
-      return groupOne;
-    case 1:
-      return (
-        <Container>
-          <TextField label='Thing 4' fullWidth />
-          <TextField label='Thing 5' fullWidth />
-          <TextField label='Thing 6' fullWidth />
-        </Container>
-      );
-    case 2:
-      return (
-        <Container>
-          <TextField label='Thing 7' fullWidth />
-          <TextField label='Thing 8' fullWidth />
-          <TextField label='Thing 9' fullWidth />
-        </Container>
-      );
-    default:
-      return 'Unknown stepIndex';
-  }
-}
-
-const groupOne = (
-  <Container>
-    <TextField label='Thing 1' name='inputOne' fullWidth />
-    <TextField label='Thing 2' fullWidth />
-    <TextField label='Thing 3' fullWidth />
-  </Container>
-);
 
 const steps = getSteps();
 
@@ -87,15 +55,100 @@ export class HostInfo extends Component {
     activeStep: 0,
     prevStep: null,
     inputOne: '',
+    inputTwo: '',
+    inputThree: '',
+    inputFour: '',
+    inputFive: '',
+    inputSix: '',
+    inputSeven: '',
+    inputEight: '',
+    inputNine: '',
   };
+
+  getStepContent(stepIndex) {
+    switch (stepIndex) {
+      case 0:
+        return (
+          <Container>
+            <TextField
+              label='Thing 1'
+              name='inputOne'
+              onChange={this.handleChange('inputOne')}
+              fullWidth
+            />
+            <TextField
+              label='Thing 2'
+              name='inputTwo'
+              onChange={this.handleChange('inputTwo')}
+              fullWidth
+            />
+            <TextField
+              label='Thing 3'
+              name='inputThree'
+              onChange={this.handleChange('inputThree')}
+              fullWidth
+            />
+          </Container>
+        );
+      case 1:
+        return (
+          <Container>
+            <TextField
+              label='Thing 4'
+              name='inputFour'
+              defaultValue='default'
+              onChange={this.handleChange('inputFour')}
+              fullWidth
+            />
+            <TextField
+              label='Thing 5'
+              name='inputFive'
+              onChange={this.handleChange('inputFive')}
+              fullWidth
+            />
+            <TextField
+              label='Thing 6'
+              name='inputSix'
+              onChange={this.handleChange('inputSix')}
+              fullWidth
+            />
+          </Container>
+        );
+      case 2:
+        return (
+          <Container>
+            <TextField
+              label='Thing 7'
+              name='inputSeven'
+              onChange={this.handleChange('inputSeven')}
+              fullWidth
+            />
+            <TextField
+              label='Thing 8'
+              name='inputEight'
+              onChange={this.handleChange('inputEight')}
+              fullWidth
+            />
+            <TextField
+              label='Thing 9'
+              name='inputNine'
+              onChange={this.handleChange('inputNine')}
+              fullWidth
+            />
+          </Container>
+        );
+      default:
+        return 'Unknown stepIndex';
+    }
+  }
 
   componentDidMount() {
     this.props.loadUser();
   }
 
-  handleChange = (e) => {
+  handleChange = (input) => (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [input]: e.target.value,
     });
   };
 
@@ -118,12 +171,27 @@ export class HostInfo extends Component {
   handleReset = () => {
     this.setState({
       activeStep: 0,
+      prevStep: null,
     });
   };
 
-  render() {
+  console = () => {
     console.log(this.state);
-    const { activeStep } = this.state;
+  };
+
+  render() {
+    const {
+      activeStep,
+      inputOne,
+      inputTwo,
+      inputThree,
+      inputFour,
+      inputFive,
+      inputSix,
+      inputSeven,
+      inputEight,
+      inputNine,
+    } = this.state;
 
     const {
       classes,
@@ -149,13 +217,36 @@ export class HostInfo extends Component {
                 <Typography className={classes.instructions}>
                   All steps completed, ready for review
                 </Typography>
-                <Button className={classes.button} onClick={this.handleReset}>
+                <Typography variant='body1'>{inputOne}</Typography>
+                <Typography variant='body1'>{inputTwo}</Typography>
+                <Typography variant='body1'>{inputThree}</Typography>
+                <Typography variant='body1'>{inputFour}</Typography>
+                <Typography variant='body1'>{inputFive}</Typography>
+                <Typography variant='body1'>{inputSix}</Typography>
+                <Typography variant='body1'>{inputSeven}</Typography>
+                <Typography variant='body1'>{inputEight}</Typography>
+                <Typography variant='body1'>{inputNine}</Typography>
+
+                <Button
+                  variant='contained'
+                  color='primary'
+                  className={classes.utilButton}
+                  onClick={this.handleReset}
+                >
                   Reset
+                </Button>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  className={classes.utilButton}
+                  onClick={this.console}
+                >
+                  Log
                 </Button>
               </div>
             ) : (
               <div>
-                {getStepContent(activeStep)}
+                {this.getStepContent(activeStep)}
                 <div className={classes.buttonGroup}>
                   <Button
                     disabled={activeStep === 0}
