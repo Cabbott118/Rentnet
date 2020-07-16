@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 
 // Components
 import LoadingSpinner from '../components/LoadingSpinner';
+import HostPersonalInfo from '../components/HostPersonalInfo';
+import HostPaymentInfo from '../components/HostPaymentInfo';
+import HostTerms from '../components/HostTerms';
 
 // MUI
 import Button from '@material-ui/core/Button';
@@ -45,7 +48,7 @@ const styles = (theme) => ({
 });
 
 function getSteps() {
-  return ['Step One', 'Step Two', 'Step Three'];
+  return ['Personal Information', 'Payment Information', 'Terms & Conditions'];
 }
 
 const steps = getSteps();
@@ -60,83 +63,36 @@ export class HostInfo extends Component {
     inputFour: '',
     inputFive: '',
     inputSix: '',
-    inputSeven: '',
-    inputEight: '',
-    inputNine: '',
   };
 
   getStepContent(stepIndex) {
+    const {
+      inputOne,
+      inputTwo,
+      inputThree,
+      inputFour,
+      inputFive,
+      inputSix,
+    } = this.state;
+    const values = {
+      inputOne,
+      inputTwo,
+      inputThree,
+      inputFour,
+      inputFive,
+      inputSix,
+    };
     switch (stepIndex) {
       case 0:
         return (
-          <Container>
-            <TextField
-              label='Thing 1'
-              name='inputOne'
-              onChange={this.handleChange('inputOne')}
-              fullWidth
-            />
-            <TextField
-              label='Thing 2'
-              name='inputTwo'
-              onChange={this.handleChange('inputTwo')}
-              fullWidth
-            />
-            <TextField
-              label='Thing 3'
-              name='inputThree'
-              onChange={this.handleChange('inputThree')}
-              fullWidth
-            />
-          </Container>
+          <HostPersonalInfo handleChange={this.handleChange} values={values} />
         );
       case 1:
         return (
-          <Container>
-            <TextField
-              label='Thing 4'
-              name='inputFour'
-              defaultValue='default'
-              onChange={this.handleChange('inputFour')}
-              fullWidth
-            />
-            <TextField
-              label='Thing 5'
-              name='inputFive'
-              onChange={this.handleChange('inputFive')}
-              fullWidth
-            />
-            <TextField
-              label='Thing 6'
-              name='inputSix'
-              onChange={this.handleChange('inputSix')}
-              fullWidth
-            />
-          </Container>
+          <HostPaymentInfo handleChange={this.handleChange} values={values} />
         );
       case 2:
-        return (
-          <Container>
-            <TextField
-              label='Thing 7'
-              name='inputSeven'
-              onChange={this.handleChange('inputSeven')}
-              fullWidth
-            />
-            <TextField
-              label='Thing 8'
-              name='inputEight'
-              onChange={this.handleChange('inputEight')}
-              fullWidth
-            />
-            <TextField
-              label='Thing 9'
-              name='inputNine'
-              onChange={this.handleChange('inputNine')}
-              fullWidth
-            />
-          </Container>
-        );
+        return <HostTerms />;
       default:
         return 'Unknown stepIndex';
     }
@@ -147,9 +103,7 @@ export class HostInfo extends Component {
   }
 
   handleChange = (input) => (e) => {
-    this.setState({
-      [input]: e.target.value,
-    });
+    this.setState({ [input]: e.target.value });
   };
 
   handleNext = () => {
@@ -188,9 +142,6 @@ export class HostInfo extends Component {
       inputFour,
       inputFive,
       inputSix,
-      inputSeven,
-      inputEight,
-      inputNine,
     } = this.state;
 
     const {
@@ -223,10 +174,6 @@ export class HostInfo extends Component {
                 <Typography variant='body1'>{inputFour}</Typography>
                 <Typography variant='body1'>{inputFive}</Typography>
                 <Typography variant='body1'>{inputSix}</Typography>
-                <Typography variant='body1'>{inputSeven}</Typography>
-                <Typography variant='body1'>{inputEight}</Typography>
-                <Typography variant='body1'>{inputNine}</Typography>
-
                 <Button
                   variant='contained'
                   color='primary'
