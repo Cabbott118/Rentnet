@@ -2,6 +2,9 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+// Components
+import MyButton from '../MyButton';
+
 // MUI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -112,14 +115,21 @@ class Register extends Component {
 
     return (
       <Fragment>
-        <Button
+        {/* <Button
           onClick={this.handleOpen}
           color='primary'
           variant='text'
           className={classes.button}
         >
           Sign Up
-        </Button>
+        </Button> */}
+        <MyButton
+          onClick={this.handleOpen}
+          color='primary'
+          variant='text'
+          className={classes.button}
+          buttonText='Sign Up'
+        />
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -135,6 +145,8 @@ class Register extends Component {
                 type='text'
                 label='First Name'
                 placeholder='John'
+                variant='outlined'
+                size='small'
                 className={classes.textField}
                 onChange={this.handleChange}
                 fullWidth
@@ -144,6 +156,8 @@ class Register extends Component {
                 type='text'
                 label='Last Name'
                 placeholder='Smith'
+                variant='outlined'
+                size='small'
                 className={classes.textField}
                 onChange={this.handleChange}
                 fullWidth
@@ -153,6 +167,8 @@ class Register extends Component {
                 type='email'
                 label='Email'
                 placeholder='example@example.com'
+                variant='outlined'
+                size='small'
                 className={classes.textField}
                 onChange={this.handleChange}
                 fullWidth
@@ -162,6 +178,8 @@ class Register extends Component {
                 type='password'
                 label='Password'
                 placeholder='Password'
+                variant='outlined'
+                size='small'
                 className={classes.textField}
                 onChange={this.handleChange}
                 fullWidth
@@ -171,6 +189,8 @@ class Register extends Component {
                 type='password'
                 label='Confirm Password'
                 placeholder='Confirm Password'
+                variant='outlined'
+                size='small'
                 className={classes.textField}
                 onChange={this.handleChange}
                 fullWidth

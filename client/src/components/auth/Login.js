@@ -2,6 +2,9 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+// Components
+import MyButton from '../MyButton';
+
 // MUI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -92,14 +95,13 @@ class Login extends Component {
 
     return (
       <Fragment>
-        <Button
+        <MyButton
           onClick={this.handleOpen}
           color='primary'
           variant='outlined'
           style={{ textTransform: 'none' }}
-        >
-          Login
-        </Button>
+          buttonText='Login'
+        />
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -115,6 +117,8 @@ class Login extends Component {
                 type='email'
                 label='Email'
                 placeholder='example@example.com'
+                variant='outlined'
+                size='small'
                 className={classes.textField}
                 onChange={this.handleChange}
                 fullWidth
@@ -124,10 +128,13 @@ class Login extends Component {
                 type='password'
                 label='Password'
                 placeholder='Password'
+                variant='outlined'
+                size='small'
                 className={classes.textField}
                 onChange={this.handleChange}
                 fullWidth
               />
+
               <Button
                 type='submit'
                 variant='contained'

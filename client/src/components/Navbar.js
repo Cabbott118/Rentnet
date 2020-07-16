@@ -18,7 +18,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 const styles = {
   button: {
-    fontSize: '2rem',
+    fontSize: '1.4rem',
     textTransform: 'none',
     fontWeight: '750',
   },

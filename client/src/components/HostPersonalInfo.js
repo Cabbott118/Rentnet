@@ -1,37 +1,60 @@
 import React from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 // MUI
 import Container from '@material-ui/core/Container';
-import Dialog from '@material-ui/core/Dialog';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
-export default function HostPersonalInfo(props) {
-  const { values, handleChange } = props;
+const styles = (theme) => ({
+  ...theme.spreadThis,
+});
+
+const HostPersonalInfo = (props) => {
+  const { values, handleChange, classes } = props;
 
   return (
     <Container>
       <TextField
-        label='Thing 1'
-        name='inputOne'
-        onChange={handleChange('inputOne')}
-        defaultValue={values.inputOne}
+        label='Address'
+        name='userAddress'
+        variant='outlined'
+        size='small'
+        className={classes.textField}
+        onChange={handleChange('userAddress')}
+        defaultValue={values.userAddress}
         fullWidth
       />
       <TextField
-        label='Thing 2'
-        name='inputTwo'
-        onChange={handleChange('inputTwo')}
-        defaultValue={values.inputTwo}
+        label='City'
+        name='userCity'
+        variant='outlined'
+        size='small'
+        className={classes.textField}
+        onChange={handleChange('userCity')}
+        defaultValue={values.userCity}
         fullWidth
       />
       <TextField
-        label='Thing 3'
-        name='inputThree'
-        onChange={handleChange('inputThree')}
-        defaultValue={values.inputThree}
+        label='State'
+        name='userState'
+        variant='outlined'
+        size='small'
+        className={classes.textField}
+        onChange={handleChange('userState')}
+        defaultValue={values.userState}
+        fullWidth
+      />
+      <TextField
+        label='Zip Code'
+        name='userZip'
+        variant='outlined'
+        size='small'
+        className={classes.textField}
+        onChange={handleChange('userZip')}
+        defaultValue={values.userZip}
         fullWidth
       />
     </Container>
   );
-}
+};
+export default withStyles(styles)(HostPersonalInfo);

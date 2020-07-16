@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 
@@ -16,7 +15,6 @@ import Typography from '@material-ui/core/Typography';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import TextField from '@material-ui/core/TextField';
 
 // Redux
 import { connect } from 'react-redux';
@@ -39,11 +37,6 @@ const styles = (theme) => ({
     marginRight: theme.spacing(1),
     textTransform: 'none',
   },
-  utilButton: {
-    color: 'white',
-    textTransform: 'none',
-    margin: 10,
-  },
   buttonGroup: {},
 });
 
@@ -57,30 +50,33 @@ export class HostInfo extends Component {
   state = {
     activeStep: 0,
     prevStep: null,
-    inputOne: '',
-    inputTwo: '',
-    inputThree: '',
-    inputFour: '',
-    inputFive: '',
-    inputSix: '',
+    userAddress: '',
+    userCity: '',
+    userState: '',
+    userZip: '',
+    userBankName: '',
+    userAccountNumber: '',
+    userRoutingNumber: '',
   };
 
   getStepContent(stepIndex) {
     const {
-      inputOne,
-      inputTwo,
-      inputThree,
-      inputFour,
-      inputFive,
-      inputSix,
+      userAddress,
+      userCity,
+      userState,
+      userZip,
+      userBankName,
+      userAccountNumber,
+      userRoutingNumber,
     } = this.state;
     const values = {
-      inputOne,
-      inputTwo,
-      inputThree,
-      inputFour,
-      inputFive,
-      inputSix,
+      userAddress,
+      userCity,
+      userState,
+      userZip,
+      userBankName,
+      userAccountNumber,
+      userRoutingNumber,
     };
     switch (stepIndex) {
       case 0:
@@ -136,12 +132,13 @@ export class HostInfo extends Component {
   render() {
     const {
       activeStep,
-      inputOne,
-      inputTwo,
-      inputThree,
-      inputFour,
-      inputFive,
-      inputSix,
+      userAddress,
+      userCity,
+      userState,
+      userZip,
+      userBankName,
+      userAccountNumber,
+      userRoutingNumber,
     } = this.state;
 
     const {
@@ -164,35 +161,44 @@ export class HostInfo extends Component {
 
           <Container>
             {activeStep === steps.length ? (
-              <div>
-                <Typography className={classes.instructions}>
-                  All steps completed, ready for review
+              <Container maxWidth='md'>
+                <Typography align='center'>
+                  Please review your updated information before continuing.
                 </Typography>
-                <Typography variant='body1'>{inputOne}</Typography>
-                <Typography variant='body1'>{inputTwo}</Typography>
-                <Typography variant='body1'>{inputThree}</Typography>
-                <Typography variant='body1'>{inputFour}</Typography>
-                <Typography variant='body1'>{inputFive}</Typography>
-                <Typography variant='body1'>{inputSix}</Typography>
+                <Typography variant='h6' align='center'>
+                  Address:
+                </Typography>
+                <Typography variant='body1' align='center'>
+                  {userAddress}
+                </Typography>
+
+                <Typography variant='body1' align='center'>
+                  {userCity}, {userState} {userZip}
+                </Typography>
+
+                <Typography variant='h6' align='center'>
+                  Banking Information:
+                </Typography>
+                <Typography variant='body1' align='center'>
+                  {userBankName}
+                </Typography>
+                <Typography variant='body1' align='center'>
+                  {userAccountNumber}
+                </Typography>
+                <Typography variant='body1' align='center'>
+                  {userRoutingNumber}
+                </Typography>
                 <Button
-                  variant='contained'
+                  variant='outlined'
                   color='primary'
-                  className={classes.utilButton}
-                  onClick={this.handleReset}
+                  className={classes.backButton}
+                  onClick={this.handleBack}
                 >
-                  Reset
+                  Back
                 </Button>
-                <Button
-                  variant='contained'
-                  color='primary'
-                  className={classes.utilButton}
-                  onClick={this.console}
-                >
-                  Log
-                </Button>
-              </div>
+              </Container>
             ) : (
-              <div>
+              <Container maxWidth='md'>
                 {this.getStepContent(activeStep)}
                 <div className={classes.buttonGroup}>
                   <Button
@@ -210,10 +216,10 @@ export class HostInfo extends Component {
                     onClick={this.handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'Continue' : 'Next'}
                   </Button>
                 </div>
-              </div>
+              </Container>
             )}
           </Container>
         </div>
