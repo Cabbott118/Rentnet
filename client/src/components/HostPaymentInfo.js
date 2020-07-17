@@ -3,15 +3,35 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 // MUI
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
+  button: {
+    color: 'white',
+    textTransform: 'none',
+    marginTop: 20,
+    marginBottom: 20,
+    position: 'relative',
+  },
+  backButton: {
+    marginRight: theme.spacing(1),
+    textTransform: 'none',
+  },
 });
 
 const HostPaymentInfo = (props) => {
-  const { values, handleChange, classes } = props;
+  const {
+    values,
+    handleChange,
+    handleNext,
+    handleBack,
+    activeStep,
+    classes,
+  } = props;
 
   return (
     <Container>
@@ -48,6 +68,32 @@ const HostPaymentInfo = (props) => {
         defaultValue={values.userRoutingNumber}
         fullWidth
       />
+      <Grid container direction='row' justify='flex-end' alignItems='center'>
+        <Button
+          disabled={activeStep === 0}
+          onClick={handleBack}
+          className={classes.backButton}
+          variant='outlined'
+          color='primary'
+        >
+          Back
+        </Button>
+        <Button
+          variant='contained'
+          color='primary'
+          onClick={handleNext}
+          className={classes.button}
+          disabled={
+            (values.userBankName &&
+              values.userAccountNumber &&
+              values.userRoutingNumber) === ''
+              ? true
+              : false
+          }
+        >
+          Next
+        </Button>
+      </Grid>
     </Container>
   );
 };

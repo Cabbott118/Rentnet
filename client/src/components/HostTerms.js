@@ -1,12 +1,40 @@
 import React from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 // MUI
 import Container from '@material-ui/core/Container';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
-export default function HostTerms(props) {
+const styles = (theme) => ({
+  ...theme.spreadThis,
+  button: {
+    color: 'white',
+    textTransform: 'none',
+    marginTop: 20,
+    marginBottom: 20,
+    position: 'relative',
+  },
+  backButton: {
+    marginRight: theme.spacing(1),
+    textTransform: 'none',
+  },
+});
+
+const HostTerms = (props) => {
+  const { handleNext, handleBack, activeStep, classes } = props;
+
+  const [checked, setChecked] = React.useState(false);
+  const [disabled, removeDisabled] = React.useState(true);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    removeDisabled(false);
+  };
+
   return (
     <Container>
       <Typography variant='body1'>
@@ -22,13 +50,42 @@ export default function HostTerms(props) {
         generated Lorem Ipsum is therefore always free from repetition, injected
         humour, or non-characteristic words etc.
       </Typography>
-
-      <FormControlLabel
-        value='end'
-        control={<Checkbox color='primary' />}
-        label={`By checking, you agree to Rent-Net's Terms & Conditions`}
-        labelPlacement='end'
-      />
+      <Grid container direction='row' justify='center' alignItems='center'>
+        <FormControlLabel
+          value='end'
+          control={
+            <Checkbox
+              checked={checked}
+              onChange={handleChange}
+              color='primary'
+            />
+          }
+          label={`By checking, you agree to Rent-Net's Terms & Conditions`}
+          labelPlacement='end'
+        />
+      </Grid>
+      <Grid container direction='row' justify='flex-end' alignItems='center'>
+        <Button
+          disabled={activeStep === 0}
+          onClick={handleBack}
+          className={classes.backButton}
+          variant='outlined'
+          color='primary'
+        >
+          Back
+        </Button>
+        <Button
+          variant='contained'
+          color='primary'
+          onClick={handleNext}
+          className={classes.button}
+          onChange={handleChange}
+          disabled={disabled}
+        >
+          Continue
+        </Button>
+      </Grid>
     </Container>
   );
-}
+};
+export default withStyles(styles)(HostTerms);

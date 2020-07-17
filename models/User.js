@@ -20,20 +20,41 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  user_location: {
+  userAddress: {
     type: String,
     required: false,
   },
-  user_phone: {
+  userCity: {
     type: String,
     required: false,
   },
-  bank_account_number: {
+  userZip: {
     type: String,
     required: false,
   },
-  bank_routing_number: {
+  userState: {
     type: String,
+    required: false,
+  },
+  userPhone: {
+    type: String,
+    required: false,
+  },
+  userBankName: {
+    type: String,
+    required: false,
+  },
+  userAccountNumber: {
+    type: String,
+    required: false,
+  },
+  userRoutingNumber: {
+    type: String,
+    required: false,
+  },
+  userAgreed: {
+    type: Boolean,
+    default: false,
     required: false,
   },
   is_host: {
