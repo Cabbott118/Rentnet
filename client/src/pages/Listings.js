@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 
@@ -10,7 +9,6 @@ import Grid from '@material-ui/core/Grid';
 // Components
 import TrailerCard from '../components/TrailerCard';
 import MapContainer from '../components/maps/MapContainer';
-import Search from '../components/Search';
 
 // Redux
 import { connect } from 'react-redux';
@@ -40,17 +38,6 @@ export class Listings extends Component {
 
     return (
       <Container className={classes.container}>
-        <Grid
-          container
-          direction='row'
-          justify='center'
-          alignItems='center'
-          className={classes.searchGrid}
-        >
-          <Grid item xs={12}>
-            <Search />
-          </Grid>
-        </Grid>
         <Grid
           container
           direction='row'

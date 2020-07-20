@@ -12,6 +12,7 @@ import Container from '@material-ui/core/Container';
 // MUI Dialog Specific
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -28,9 +29,7 @@ import { getItems } from '../redux/actions/itemActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
-  appBar: {
-    position: 'relative',
-  },
+
   title: {
     marginLeft: theme.spacing(2),
     flex: 1,
@@ -219,39 +218,16 @@ export class TrailerCard extends Component {
         {/* Dialog only appears when a trailer is clicked. ID is passed through onOpenClick handler */}
 
         <Dialog
-          fullScreen
+          fullWidth
+          maxWidth='sm'
           open={this.state.open}
           onClose={this.handleClose}
           TransitionComponent={Transition}
         >
-          <AppBar className={classes.appBar}>
-            <Toolbar>
-              <IconButton
-                edge='start'
-                color='secondary'
-                onClick={this.handleClose}
-                aria-label='close'
-              >
-                <CloseIcon />
-              </IconButton>
-              <Typography
-                variant='h6'
-                color='secondary'
-                className={classes.title}
-              >
-                {trailer_type} Trailer in {item_location}
-              </Typography>
-              <Button
-                autoFocus
-                color='secondary'
-                variant='outlined'
-                className={classes.button}
-                onClick={this.handleClose}
-              >
-                Rent Trailer
-              </Button>
-            </Toolbar>
-          </AppBar>
+          <DialogTitle style={{ alignContent: 'center' }}>
+            {trailer_type} trailer in {item_location}
+          </DialogTitle>
+
           <Container>
             <Typography variant='h6' color='textSecondary' align='center'>
               {brand}
