@@ -36,7 +36,7 @@ export class Navbar extends Component {
       classes,
     } = this.props;
     return (
-      <AppBar color='inherit'>
+      <AppBar color='secondary'>
         <Container maxWidth='lg'>
           <Toolbar>
             <Button

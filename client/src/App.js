@@ -9,6 +9,7 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Account from './pages/Account';
+import AddListingForm from './pages/AddListingForm';
 import MyListings from './pages/MyListings';
 import HostInfo from './pages/HostInfo';
 import Listings from './pages/Listings';
@@ -40,6 +41,7 @@ class App extends Component {
             <div className='App'>
               <Route exact path='/' component={Home} />
               <Route exact path='/account' component={Account} />
+              <Route exact path='/addlisting' component={AddListingForm} />
               <Route exact path='/mylistings' component={MyListings} />
               <Route exact path='/hostinfo' component={HostInfo} />
               <Route exact path='/listings' component={Listings} />

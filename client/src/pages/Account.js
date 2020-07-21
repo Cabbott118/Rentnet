@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 // MUI
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 // Components
@@ -21,6 +22,9 @@ const styles = (theme) => ({
   container: {
     padding: '2rem',
     borderBottom: '1px solid #ececec',
+  },
+  containerBottom: {
+    padding: '2rem',
   },
   manageButton: {
     color: '#fff',
@@ -44,6 +48,7 @@ export class Account extends Component {
     if (!user) {
       return <LoadingSpinner loading={isLoading} />;
     } else {
+      console.log(user);
       return (
         <Fragment>
           <Container className={classes.container}>
@@ -57,15 +62,36 @@ export class Account extends Component {
           <Container className={classes.container}>
             <div>
               {user.is_host ? (
-                <Button
-                  variant='contained'
-                  color='primary'
-                  className={classes.manageButton}
-                  component={Link}
-                  to='/mylistings'
+                <Grid
+                  container
+                  direction='column'
+                  justify='flex-start'
+                  alignItems='flex-start'
+                  spacing={2}
                 >
-                  Manage Listings
-                </Button>
+                  <Grid item>
+                    <Button
+                      variant='contained'
+                      color='primary'
+                      className={classes.manageButton}
+                      component={Link}
+                      to='/addlisting'
+                    >
+                      Add Listing
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant='contained'
+                      color='primary'
+                      className={classes.manageButton}
+                      component={Link}
+                      to='/mylistings'
+                    >
+                      Manage Listings
+                    </Button>
+                  </Grid>
+                </Grid>
               ) : (
                 <Typography
                   color='primary'
@@ -77,6 +103,8 @@ export class Account extends Component {
                 </Typography>
               )}
             </div>
+          </Container>
+          <Container className={classes.containerBottom}>
             <Logout />
           </Container>
         </Fragment>

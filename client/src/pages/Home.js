@@ -1,18 +1,18 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 // Components
 import Hero from '../components/Hero';
 
 // Utilities
-import background from '../utility/images/bg1.jpg';
+import background from '../utility/images/openRoad.jpg';
 
 // MUI
 import Container from '@material-ui/core/Container';
 
 const styles = {
-  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9)), url(${background})`,
+  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url(${background})`,
   backgroundSize: 'cover',
-  height: '93.6vh',
+  minHeight: '93.6vh',
 };
 
 export class Home extends Component {
