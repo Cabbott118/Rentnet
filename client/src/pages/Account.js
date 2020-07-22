@@ -48,7 +48,6 @@ export class Account extends Component {
     if (!user) {
       return <LoadingSpinner loading={isLoading} />;
     } else {
-      console.log(user);
       return (
         <Fragment>
           <Container className={classes.container}>

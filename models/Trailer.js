@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Create Schema
-const ItemSchema = new Schema({
+const TrailerSchema = new Schema({
   brand: {
     type: String,
     required: true,
@@ -23,21 +23,34 @@ const ItemSchema = new Schema({
     type: String,
     required: true,
   },
-  added_by: {
+  owner_id: {
     type: String,
     required: true,
   },
-  added_by_fname: {
+  trailer_address: {
     type: String,
     required: true,
   },
-  added_by_lname: {
+  trailer_city: {
     type: String,
     required: true,
   },
-  item_location: {
+  trailer_zip: {
     type: String,
     required: true,
+  },
+  trailer_state: {
+    type: String,
+    required: true,
+  },
+  currently_available: {
+    type: Boolean,
+    default: true,
+    required: true,
+  },
+  currently_rented_by: {
+    type: String,
+    required: false,
   },
   date: {
     type: Date,
@@ -45,4 +58,4 @@ const ItemSchema = new Schema({
   },
 });
 
-module.exports = Item = mongoose.model('item', ItemSchema);
+module.exports = Trailer = mongoose.model('trailer', TrailerSchema);

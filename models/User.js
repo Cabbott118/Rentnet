@@ -20,39 +20,39 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  userAddress: {
+  user_address: {
     type: String,
     required: false,
   },
-  userCity: {
+  user_city: {
     type: String,
     required: false,
   },
-  userZip: {
+  user_zip: {
     type: String,
     required: false,
   },
-  userState: {
+  user_state: {
     type: String,
     required: false,
   },
-  userPhone: {
+  user_phone: {
     type: String,
     required: false,
   },
-  userBankName: {
+  user_bank_name: {
     type: String,
     required: false,
   },
-  userAccountNumber: {
+  user_account_number: {
     type: String,
     required: false,
   },
-  userRoutingNumber: {
+  user_routing_number: {
     type: String,
     required: false,
   },
-  userAgreed: {
+  user_agreed: {
     type: Boolean,
     default: false,
     required: false,

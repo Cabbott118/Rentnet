@@ -38,52 +38,52 @@ const HostPersonalInfo = (props) => {
     <Container>
       <TextField
         label='Address'
-        name='userAddress'
+        name='user_address'
         variant='outlined'
         size='small'
         className={classes.textField}
-        onChange={handleChange('userAddress')}
-        defaultValue={values.userAddress}
+        onChange={handleChange('user_address')}
+        defaultValue={values.user_address}
         fullWidth
       />
       <TextField
         label='City'
-        name='userCity'
+        name='user_city'
         variant='outlined'
         size='small'
         className={classes.textField}
-        onChange={handleChange('userCity')}
-        defaultValue={values.userCity}
+        onChange={handleChange('user_city')}
+        defaultValue={values.user_city}
         fullWidth
       />
       <TextField
         label='State'
-        name='userState'
+        name='user_state'
         variant='outlined'
         size='small'
         className={classes.textField}
-        onChange={handleChange('userState')}
-        defaultValue={values.userState}
+        onChange={handleChange('user_state')}
+        defaultValue={values.user_state}
         fullWidth
       />
       <TextField
         label='Zip Code'
-        name='userZip'
+        name='user_zip'
         variant='outlined'
         size='small'
         className={classes.textField}
-        onChange={handleChange('userZip')}
-        defaultValue={values.userZip}
+        onChange={handleChange('user_zip')}
+        defaultValue={values.user_zip}
         fullWidth
       />
       <TextField
         label='Phone Number'
-        name='userPhone'
+        name='user_phone'
         variant='outlined'
         size='small'
         className={classes.textField}
-        onChange={handleChange('userPhone')}
-        defaultValue={values.userPhone}
+        onChange={handleChange('user_phone')}
+        defaultValue={values.user_phone}
         helperText='Please do not include anything other than numbers'
         fullWidth
       />
@@ -103,11 +103,11 @@ const HostPersonalInfo = (props) => {
           onClick={handleNext}
           className={classes.button}
           disabled={
-            (values.userAddress &&
-              values.userCity &&
-              values.userState &&
-              values.userZip &&
-              values.userPhone) === ''
+            (values.user_address &&
+              values.user_city &&
+              values.user_state &&
+              values.user_zip &&
+              values.user_phone) === ''
               ? true
               : false
           }

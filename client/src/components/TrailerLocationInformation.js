@@ -25,7 +25,7 @@ const styles = (theme) => ({
   },
 });
 
-const TrailerInformation = (props) => {
+const TrailerLocationInformation = (props) => {
   const {
     values,
     handleChange,
@@ -37,54 +37,43 @@ const TrailerInformation = (props) => {
   return (
     <Container>
       <TextField
-        label='Trailer Brand'
-        name='brand'
+        label='Address'
+        name='trailer_address'
         variant='outlined'
         size='small'
         className={classes.textField}
-        onChange={handleChange('brand')}
-        defaultValue={values.brand}
-        fullWidth
-      />
-      {/* TODO: Change this field out for dropdown ('Select' in MUI) */}
-      <TextField
-        label='Trailer Type'
-        name='trailer_type'
-        variant='outlined'
-        size='small'
-        className={classes.textField}
-        onChange={handleChange('trailer_type')}
-        defaultValue={values.trailer_type}
+        onChange={handleChange('trailer_address')}
+        defaultValue={values.trailer_address}
         fullWidth
       />
       <TextField
-        label='Deck Dimensions'
-        name='deck_dimensions'
+        label='City'
+        name='trailer_city'
         variant='outlined'
         size='small'
         className={classes.textField}
-        onChange={handleChange('deck_dimensions')}
-        defaultValue={values.deck_dimensions}
+        onChange={handleChange('trailer_city')}
+        defaultValue={values.trailer_city}
         fullWidth
       />
       <TextField
-        label='Max Weight Rating'
-        name='weight'
+        label='State'
+        name='trailer_state'
         variant='outlined'
         size='small'
         className={classes.textField}
-        onChange={handleChange('weight')}
-        defaultValue={values.weight}
+        onChange={handleChange('trailer_state')}
+        defaultValue={values.trailer_state}
         fullWidth
       />
       <TextField
-        label='Price per Day'
-        name='price'
+        label='Zip Code'
+        name='trailer_zip'
         variant='outlined'
         size='small'
         className={classes.textField}
-        onChange={handleChange('price')}
-        defaultValue={values.price}
+        onChange={handleChange('trailer_zip')}
+        defaultValue={values.trailer_zip}
         fullWidth
       />
       <Grid container direction='row' justify='flex-end' alignItems='center'>
@@ -103,11 +92,10 @@ const TrailerInformation = (props) => {
           onClick={handleNext}
           className={classes.button}
           disabled={
-            (values.brand &&
-              values.trailer_type &&
-              values.deck_dimensions &&
-              values.weight &&
-              values.price) === ''
+            (values.trailer_address &&
+              values.trailer_city &&
+              values.trailer_state &&
+              values.trailer_zip) === ''
               ? true
               : false
           }
@@ -118,4 +106,4 @@ const TrailerInformation = (props) => {
     </Container>
   );
 };
-export default withStyles(styles)(TrailerInformation);
+export default withStyles(styles)(TrailerLocationInformation);

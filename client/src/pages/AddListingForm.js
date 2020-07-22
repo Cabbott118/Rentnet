@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 // Components
 import LoadingSpinner from '../components/LoadingSpinner';
 import TrailerInformation from '../components/TrailerInformation';
+import TrailerLocationInformation from '../components/TrailerLocationInformation';
+import TrailerReviewDisplay from '../components/TrailerReviewDisplay';
 
 // MUI
 import Button from '@material-ui/core/Button';
@@ -40,7 +42,7 @@ const styles = (theme) => ({
 });
 
 function getSteps() {
-  return ['Trailer Information', 'Pick Up & Drop Off', 'Terms & Conditions'];
+  return ['Trailer Information', 'Pick Up & Drop Off'];
 }
 
 const steps = getSteps();
@@ -54,10 +56,10 @@ export class AddListingForm extends Component {
     deck_dimensions: '',
     weight: '',
     price: '',
-    added_by: '',
-    added_by_fname: '',
-    added_by_lname: '',
-    item_location: '',
+    trailer_address: '',
+    trailer_city: '',
+    trailer_zip: '',
+    trailer_state: '',
     msg: null,
   };
 
@@ -68,10 +70,10 @@ export class AddListingForm extends Component {
       deck_dimensions,
       weight,
       price,
-      added_by,
-      added_by_fname,
-      added_by_lname,
-      item_location,
+      trailer_address,
+      trailer_city,
+      trailer_zip,
+      trailer_state,
     } = this.state;
 
     const values = {
@@ -80,10 +82,10 @@ export class AddListingForm extends Component {
       deck_dimensions,
       weight,
       price,
-      added_by,
-      added_by_fname,
-      added_by_lname,
-      item_location,
+      trailer_address,
+      trailer_city,
+      trailer_zip,
+      trailer_state,
     };
 
     switch (stepIndex) {
@@ -98,9 +100,16 @@ export class AddListingForm extends Component {
           />
         );
       case 1:
-        return <p>Step Two</p>;
-      case 2:
-        return <p>Step Three</p>;
+        return (
+          <TrailerLocationInformation
+            handleChange={this.handleChange}
+            handleBack={this.handleBack}
+            handleNext={this.handleNext}
+            activeStep={stepIndex}
+            values={values}
+          />
+        );
+
       default:
         return 'Unknown stepIndex';
     }
@@ -138,11 +147,49 @@ export class AddListingForm extends Component {
     } = this.props.auth;
     if (!_id) return null;
 
-    console.log('Submit Working');
+    const {
+      brand,
+      trailer_type,
+      deck_dimensions,
+      weight,
+      price,
+      trailer_address,
+      trailer_city,
+      trailer_zip,
+      trailer_state,
+    } = this.state;
+
+    const newTrailer = {
+      brand,
+      trailer_type,
+      deck_dimensions,
+      weight,
+      price,
+      owner_id: _id,
+      trailer_address,
+      trailer_city,
+      trailer_zip,
+      trailer_state,
+    };
+
+    this.props.addItem(newTrailer);
+
+    window.location.href = '/success';
   };
 
   render() {
-    const { activeStep } = this.state;
+    const {
+      activeStep,
+      brand,
+      trailer_type,
+      deck_dimensions,
+      weight,
+      price,
+      trailer_address,
+      trailer_city,
+      trailer_zip,
+      trailer_state,
+    } = this.state;
 
     const {
       classes,
@@ -165,6 +212,17 @@ export class AddListingForm extends Component {
           <Container>
             {activeStep === steps.length ? (
               <Container maxWidth='md'>
+                <TrailerReviewDisplay
+                  brand={brand}
+                  trailer_type={trailer_type}
+                  deck_dimensions={deck_dimensions}
+                  weight={weight}
+                  price={price}
+                  trailer_address={trailer_address}
+                  trailer_city={trailer_city}
+                  trailer_state={trailer_state}
+                  trailer_zip={trailer_zip}
+                />
                 <Grid
                   container
                   direction='row'
@@ -185,7 +243,7 @@ export class AddListingForm extends Component {
                     className={classes.button}
                     onClick={this.handleSubmit}
                   >
-                    Confirm and Update
+                    Add Listing
                   </Button>
                 </Grid>
               </Container>

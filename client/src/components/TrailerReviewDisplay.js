@@ -25,14 +25,15 @@ const styles = (theme) => ({
 const HostReviewDisplay = (props) => {
   const {
     classes,
-    user_address,
-    user_city,
-    user_state,
-    user_zip,
-    user_phone,
-    user_bank_name,
-    user_account_number,
-    user_routing_number,
+    brand,
+    trailer_type,
+    deck_dimensions,
+    weight,
+    price,
+    trailer_address,
+    trailer_city,
+    trailer_zip,
+    trailer_state,
   } = props;
   return (
     <div>
@@ -46,11 +47,11 @@ const HostReviewDisplay = (props) => {
               Address:
             </Typography>
             <Typography variant='body1' align='center'>
-              {user_address}
+              {trailer_address}
             </Typography>
 
             <Typography variant='body1' align='center'>
-              {user_city}, {user_state} {user_zip}
+              {trailer_city}, {trailer_state} {trailer_zip}
             </Typography>
           </Paper>
         </Grid>
@@ -58,26 +59,29 @@ const HostReviewDisplay = (props) => {
         <Grid item xs={12} md={4}>
           <Paper className={classes.paper}>
             <Typography variant='h6' align='center' color='textPrimary'>
-              Phone Number:
+              Brand:
             </Typography>
             <Typography variant='body1' align='center'>
-              {user_phone}
+              {brand}
             </Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} md={4}>
           <Paper className={classes.paper}>
             <Typography variant='h6' align='center' color='textPrimary'>
-              Banking Information:
+              Other Information:
             </Typography>
             <Typography variant='body1' align='center'>
-              {user_bank_name}
+              {trailer_type}
             </Typography>
             <Typography variant='body1' align='center'>
-              {user_account_number}
+              {deck_dimensions}
             </Typography>
             <Typography variant='body1' align='center'>
-              {user_routing_number}
+              {weight}
+            </Typography>
+            <Typography variant='body1' align='center'>
+              {price}
             </Typography>
           </Paper>
         </Grid>

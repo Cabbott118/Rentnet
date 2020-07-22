@@ -51,41 +51,40 @@ export class HostInfo extends Component {
   state = {
     activeStep: 0,
     prevStep: null,
-    userAddress: '',
-    userCity: '',
-    userState: '',
-    userZip: '',
-    userPhone: '',
-    userBankName: '',
-    userAccountNumber: '',
-    userRoutingNumber: '',
-    userAgreed: false,
+    user_address: '',
+    user_city: '',
+    user_state: '',
+    user_zip: '',
+    user_phone: '',
+    user_bank_name: '',
+    user_account_number: '',
+    user_routing_number: '',
+    user_agreed: false,
   };
 
   getStepContent(stepIndex) {
     const {
-      userAddress,
-      userCity,
-      userState,
-      userZip,
-      userPhone,
-      userBankName,
-      userAccountNumber,
-      userRoutingNumber,
-      userAgreed,
+      user_address,
+      user_city,
+      user_state,
+      user_zip,
+      user_phone,
+      user_bank_name,
+      user_account_number,
+      user_routing_number,
+      user_agreed,
     } = this.state;
 
     const values = {
-      userAddress,
-      userCity,
-      userState,
-      userZip,
-      userPhone,
-
-      userBankName,
-      userAccountNumber,
-      userRoutingNumber,
-      userAgreed,
+      user_address,
+      user_city,
+      user_state,
+      user_zip,
+      user_phone,
+      user_bank_name,
+      user_account_number,
+      user_routing_number,
+      user_agreed,
     };
     switch (stepIndex) {
       case 0:
@@ -151,7 +150,7 @@ export class HostInfo extends Component {
     this.setState({
       prevStep: prevStep + 1,
       activeStep: activeStep + 1,
-      userAgreed: true,
+      user_agreed: true,
     });
   };
 
@@ -164,30 +163,28 @@ export class HostInfo extends Component {
     if (!_id) return null;
 
     const {
-      userAddress,
-      userCity,
-      userState,
-      userZip,
-      userPhone,
-
-      userBankName,
-      userAccountNumber,
-      userRoutingNumber,
-      userAgreed,
+      user_address,
+      user_city,
+      user_state,
+      user_zip,
+      user_phone,
+      user_bank_name,
+      user_account_number,
+      user_routing_number,
+      user_agreed,
     } = this.state;
 
     const updatedUser = {
       id: _id,
-      userAddress,
-      userCity,
-      userState,
-      userZip,
-      userPhone,
-
-      userBankName,
-      userAccountNumber,
-      userRoutingNumber,
-      userAgreed,
+      user_address,
+      user_city,
+      user_state,
+      user_zip,
+      user_phone,
+      user_bank_name,
+      user_account_number,
+      user_routing_number,
+      user_agreed,
       is_host: true,
     };
     this.props.editUser(updatedUser);
@@ -197,15 +194,14 @@ export class HostInfo extends Component {
   render() {
     const {
       activeStep,
-      userAddress,
-      userCity,
-      userState,
-      userZip,
-      userPhone,
-
-      userBankName,
-      userAccountNumber,
-      userRoutingNumber,
+      user_address,
+      user_city,
+      user_state,
+      user_zip,
+      user_phone,
+      user_bank_name,
+      user_account_number,
+      user_routing_number,
     } = this.state;
 
     const {
@@ -230,14 +226,14 @@ export class HostInfo extends Component {
             {activeStep === steps.length ? (
               <Container maxWidth='md'>
                 <HostReviewDisplay
-                  userAddress={userAddress}
-                  userCity={userCity}
-                  userState={userState}
-                  userZip={userZip}
-                  userPhone={userPhone}
-                  userBankName={userBankName}
-                  userAccountNumber={userAccountNumber}
-                  userRoutingNumber={userRoutingNumber}
+                  user_address={user_address}
+                  user_city={user_city}
+                  user_state={user_state}
+                  user_zip={user_zip}
+                  user_phone={user_phone}
+                  user_bank_name={user_bank_name}
+                  user_account_number={user_account_number}
+                  user_routing_number={user_routing_number}
                 />
                 <Grid
                   container

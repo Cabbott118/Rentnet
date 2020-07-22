@@ -40,32 +40,32 @@ const HostPaymentInfo = (props) => {
       </Typography>
       <TextField
         label='Bank Name'
-        name='userBankName'
+        name='user_bank_name'
         variant='outlined'
         size='small'
         className={classes.textField}
-        onChange={handleChange('userBankName')}
-        defaultValue={values.userBankName}
+        onChange={handleChange('user_bank_name')}
+        defaultValue={values.user_bank_name}
         fullWidth
       />
       <TextField
         label='Bank Account Number'
-        name='userAccountNumber'
+        name='user_account_number'
         variant='outlined'
         size='small'
         className={classes.textField}
-        onChange={handleChange('userAccountNumber')}
-        defaultValue={values.userAccountNumber}
+        onChange={handleChange('user_account_number')}
+        defaultValue={values.user_account_number}
         fullWidth
       />
       <TextField
         label='Bank Routing Number'
-        name='userRoutingNumber'
+        name='user_routing_number'
         variant='outlined'
         size='small'
         className={classes.textField}
-        onChange={handleChange('userRoutingNumber')}
-        defaultValue={values.userRoutingNumber}
+        onChange={handleChange('user_routing_number')}
+        defaultValue={values.user_routing_number}
         fullWidth
       />
       <Grid container direction='row' justify='flex-end' alignItems='center'>
@@ -84,9 +84,9 @@ const HostPaymentInfo = (props) => {
           onClick={handleNext}
           className={classes.button}
           disabled={
-            (values.userBankName &&
-              values.userAccountNumber &&
-              values.userRoutingNumber) === ''
+            (values.user_bank_name &&
+              values.user_account_number &&
+              values.user_routing_number) === ''
               ? true
               : false
           }

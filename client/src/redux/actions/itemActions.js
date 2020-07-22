@@ -15,7 +15,7 @@ import { returnErrors } from './errorActions';
 export const getItems = () => (dispatch) => {
   dispatch(setItemsLoading());
   axios // Proxy giving ability to shorten endpoint
-    .get('/api/items')
+    .get('/api/trailers')
     .then((res) =>
       dispatch({
         type: GET_ITEMS,
@@ -31,7 +31,7 @@ export const getItems = () => (dispatch) => {
 export const getFilteredItems = (data) => (dispatch) => {
   dispatch(setItemsLoading());
   axios // Proxy giving ability to shorten endpoint
-    .get(`/api/items/${data}`)
+    .get(`/api/trailers/${data}`)
     .then((res) =>
       dispatch({
         type: GET_FILTERED_ITEMS,
@@ -46,7 +46,7 @@ export const getFilteredItems = (data) => (dispatch) => {
 export const addItem = (item) => (dispatch, getState) => {
   axios
     // Attaching token to request in header
-    .post('/api/items', item, tokenConfig(getState))
+    .post('/api/trailers', item, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: ADD_ITEM,
@@ -61,7 +61,7 @@ export const addItem = (item) => (dispatch, getState) => {
 export const editItem = (item) => (dispatch, getState) => {
   axios
     // Attaching token to request in header
-    .put(`/api/items/${item.id}`, item, tokenConfig(getState))
+    .put(`/api/trailers/${item.id}`, item, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: EDIT_ITEM,
@@ -76,7 +76,7 @@ export const editItem = (item) => (dispatch, getState) => {
 export const deleteItem = (id) => (dispatch, getState) => {
   axios
     // Attaching token to request in header
-    .delete(`/api/items/${id}`, tokenConfig(getState))
+    .delete(`/api/trailers/${id}`, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: DELETE_ITEM,
