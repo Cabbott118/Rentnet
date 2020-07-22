@@ -15,6 +15,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import EditIcon from '@material-ui/icons/Edit';
 import ViewListIcon from '@material-ui/icons/ViewList';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 
 // Components
 import Logout from '../components/auth/Logout';
@@ -123,7 +124,24 @@ export class Account extends Component {
                   </Typography>
                 </Paper>
               </Grid>
-              <Grid item>
+              <Grid item component={Link} to='/addlisting'>
+                <Paper elevation={3} className={classes.paper}>
+                  <PostAddIcon
+                    color='primary'
+                    fontSize='large'
+                    className={classes.icon}
+                  />
+                  <Typography
+                    variant='body2'
+                    color='textSecondary'
+                    align='center'
+                    className={classes.tileText}
+                  >
+                    Create New Listing
+                  </Typography>
+                </Paper>
+              </Grid>
+              <Grid item component={Link} to='/mylistings'>
                 <Paper elevation={3} className={classes.paper}>
                   <ViewListIcon
                     color='primary'
