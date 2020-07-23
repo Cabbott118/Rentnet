@@ -15,6 +15,7 @@ import HostInfo from './pages/HostInfo';
 import Listings from './pages/Listings';
 import AboutUs from './pages/AboutUs';
 import Success from './pages/Success';
+import UnderConstruction from './pages/UnderConstruction';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -48,6 +49,11 @@ class App extends Component {
               <Route exact path='/listings' component={Listings} />
               <Route exact path='/aboutus' component={AboutUs} />
               <Route exact path='/success' component={Success} />
+              <Route
+                exact
+                path='/underconstruction'
+                component={UnderConstruction}
+              />
             </div>
           </Router>
         </Provider>

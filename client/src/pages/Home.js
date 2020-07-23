@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 // Components
 import Hero from '../components/Hero';
+import Footer from '../components/Footer';
 
 // Utilities
 import background from '../utility/images/openRoad.jpg';
@@ -18,11 +19,14 @@ const styles = {
 export class Home extends Component {
   render() {
     return (
-      <div style={styles}>
-        <Container style={{ paddingTop: '50px' }}>
-          <Hero />
-        </Container>
-      </div>
+      <Fragment>
+        <div style={styles}>
+          <Container style={{ paddingTop: '50px' }}>
+            <Hero />
+          </Container>
+        </div>
+        <Footer />
+      </Fragment>
     );
   }
 }
