@@ -6,18 +6,11 @@ import PropTypes from 'prop-types';
 // MUI
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
-// MUI Dialog Specific
-// import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-// import AppBar from '@material-ui/core/AppBar';
-// import Toolbar from '@material-ui/core/Toolbar';
-// import IconButton from '@material-ui/core/IconButton';
-// import CloseIcon from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
+// MUI Icons
+import InfoIcon from '@material-ui/icons/InfoOutlined';
 
 // Components
 import LoadingSpinner from './LoadingSpinner';
@@ -29,89 +22,28 @@ import { getItems } from '../redux/actions/itemActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
-
-  title: {
-    marginLeft: theme.spacing(2),
-    flex: 1,
+  trailerPaper: {
+    width: '100%',
+    minHeight: '200px',
+    position: 'relative',
   },
   image: {
-    margin: '1rem',
-    position: 'relative',
-    height: 200,
-    [theme.breakpoints.down('xs')]: {
-      width: '90% !important', // Overrides inline-style
-      height: 150,
-    },
-    '&:hover, &$focusVisible': {
-      zIndex: 1,
-      '& $imageBackdrop': {
-        opacity: 0.15,
-      },
-      '& $imageMarked': {
-        opacity: 0,
-      },
-      '& $imageTitle': {
-        border: '4px solid currentColor',
-      },
-    },
+    height: '200px',
+    width: '100%',
+    borderRadius: '5px',
   },
-  focusVisible: {},
-  imageButton: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: theme.palette.common.white,
+  bottomItem: {
+    width: '100%',
+    marginTop: '2rem',
   },
-  imageSrc: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center 40%',
+  trailerButton: {
+    textTransform: 'none',
   },
-  imageBackdrop: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundColor: theme.palette.common.black,
-    opacity: 0.4,
-    transition: theme.transitions.create('opacity'),
-  },
-  imageTitle: {
-    position: 'relative',
-    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${
-      theme.spacing(1) + 6
-    }px`,
-  },
-  imageMarked: {
-    height: 3,
-    width: 18,
-    backgroundColor: theme.palette.common.white,
-    position: 'absolute',
-    bottom: -2,
-    left: 'calc(50% - 9px)',
-    transition: theme.transitions.create('opacity'),
-  },
-});
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction='up' ref={ref} {...props} />;
 });
 
 export class TrailerCard extends Component {
   state = {
     open: false,
-    id: '',
-    trailer: {},
   };
 
   componentDidMount() {
@@ -119,139 +51,100 @@ export class TrailerCard extends Component {
     this.props.getItems();
   }
 
-  handleOpenClick = (id) => {
-    const {
-      item: { items },
-    } = this.props;
-    for (let i = 0; i < items.length; i++) {
-      if (id === items[i]._id) {
-        this.setState({
-          trailer: items[i],
-        });
-      }
-    }
-
-    this.setState({
-      open: true,
-      id,
-    });
-  };
-
-  handleClose = () => {
-    this.setState({
-      open: false,
-      id: '',
-    });
-  };
-
   render() {
     const {
       classes,
       item: { items, loading },
     } = this.props;
 
-    const {
-      brand,
-      date,
-      deck_dimensions,
-      price,
-      trailer_type,
-      weight,
-      item_location,
-    } = this.state.trailer;
-
     if (loading) {
       return <LoadingSpinner loading={loading} />;
     }
 
     const listings = (
-      <Grid container direction='column' justify='flex-start'>
+      <Grid container direction='column' justify='flex-start' spacing={2}>
         {items.map(
           ({
             _id,
             brand,
             trailer_type,
-            item_location,
+            trailer_city,
             date,
+            weight,
             deck_dimensions,
             price,
           }) => (
-            <Grid item xs={12} sm={12} md={6} key={_id}>
-              <ButtonBase
-                focusRipple
-                className={classes.image}
-                focusVisibleClassName={classes.focusVisible}
-                onClick={this.handleOpenClick.bind(this, _id)}
-                style={{
-                  width: '300px',
-                }}
-              >
-                <span
-                  className={classes.imageSrc}
-                  style={{
-                    backgroundImage: 'url(https://via.placeholder.com/250x150)',
-                  }}
-                />
-                <span className={classes.imageBackdrop} />
-                <span className={classes.imageButton}>
-                  <Typography
-                    component='span'
-                    variant='h6'
-                    color='inherit'
-                    className={classes.imageTitle}
-                  >
-                    {trailer_type}
-                    <span className={classes.imageMarked} />
-                  </Typography>
-                </span>
-              </ButtonBase>
+            <Grid item xs={12} sm={12} md={12} key={_id}>
+              <Paper variant='outlined' className={classes.trailerPaper}>
+                <Grid container>
+                  <Grid item xs={12} md={4}>
+                    <img
+                      alt={brand}
+                      src='https://media.istockphoto.com/photos/new-cargo-cart-picture-id135449272'
+                      className={classes.image}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={8} style={{ padding: '1rem' }}>
+                    <Grid
+                      container
+                      direction='column'
+                      justify='flex-start'
+                      alignItems='flex-start'
+                      spacing={1}
+                    >
+                      <Grid item>
+                        <Typography variant='body1'>
+                          {trailer_type} trailer in {trailer_city}
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography variant='h6'>
+                          {deck_dimensions} ft. - {brand}
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography variant='body1'>
+                          Rated for a capacity of {weight} lbs.
+                        </Typography>
+                      </Grid>
+                      <Grid item className={classes.bottomItem}>
+                        <Grid
+                          container
+                          direction='row'
+                          justify='space-between'
+                          alignItems='center'
+                        >
+                          <Grid item>
+                            <Typography variant='subtitle1'>
+                              ${price} / day
+                            </Typography>
+                          </Grid>
+                          <Grid item>
+                            <Button
+                              variant='outlined'
+                              color='primary'
+                              className={classes.trailerButton}
+                            >
+                              More Info
+                              <InfoIcon
+                                fontSize='small'
+                                style={{ marginLeft: '.5rem' }}
+                              />
+                            </Button>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Paper>
             </Grid>
           )
         )}
       </Grid>
     );
 
-    return (
-      <Fragment>
-        {listings}
-
-        {/* Dialog only appears when a trailer is clicked. ID is passed through onOpenClick handler */}
-
-        <Dialog
-          fullWidth
-          maxWidth='sm'
-          open={this.state.open}
-          onClose={this.handleClose}
-          TransitionComponent={Transition}
-        >
-          <DialogTitle style={{ alignContent: 'center' }}>
-            {trailer_type} trailer in {item_location}
-          </DialogTitle>
-
-          <Container>
-            <Typography variant='h6' color='textSecondary' align='center'>
-              {brand}
-            </Typography>
-
-            <Typography variant='h6' color='textSecondary' align='center'>
-              {deck_dimensions}
-            </Typography>
-
-            <Typography variant='h6' color='textSecondary' align='center'>
-              Capacity of {weight} lbs
-            </Typography>
-
-            <Typography variant='h6' color='textSecondary' align='center'>
-              ${price}/Day
-            </Typography>
-
-            <Typography variant='h6' color='textSecondary' align='center'>
-              {date}
-            </Typography>
-          </Container>
-        </Dialog>
-      </Fragment>
-    );
+    return <Fragment>{listings}</Fragment>;
   }
 }
 

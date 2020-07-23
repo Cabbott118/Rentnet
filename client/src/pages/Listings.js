@@ -3,7 +3,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 
 // MUI
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
 // Components
@@ -16,11 +15,8 @@ import { loadUser } from '../redux/actions/authActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
-  container: {
-    padding: '1.5rem',
-  },
-  searchGrid: {
-    marginBottom: '1rem',
+  trailerContainer: {
+    padding: '2rem 1rem',
   },
   map: {
     position: 'sticky',
@@ -37,22 +33,21 @@ export class Listings extends Component {
     const { classes } = this.props;
 
     return (
-      <Container className={classes.container}>
-        <Grid
-          container
-          direction='row'
-          justify='flex-start'
-          alignItems='flex-start'
-        >
-          <Grid item xs={12} md={6}>
-            <TrailerCard />
-          </Grid>
-
-          <Grid item xs={12} md={6} className={classes.map}>
-            <MapContainer />
-          </Grid>
+      <Grid
+        container
+        direction='row'
+        justify='flex-start'
+        alignItems='flex-start'
+        className={classes.gridContainer}
+      >
+        <Grid item xs={12} md={6} className={classes.trailerContainer}>
+          <TrailerCard />
         </Grid>
-      </Container>
+
+        <Grid item xs={12} md={6} className={classes.map}>
+          <MapContainer />
+        </Grid>
+      </Grid>
     );
   }
 }

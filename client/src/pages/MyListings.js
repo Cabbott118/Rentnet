@@ -1,13 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 
 // MUI
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -109,7 +106,7 @@ export class MyListings extends Component {
                           {trailer.weight} lbs.
                         </TableCell>
                         <TableCell align='left'>${trailer.price}</TableCell>
-                        <TableCell align='left'>
+                        <TableCell align='right'>
                           <Button>
                             <EditIcon fontSize='small' color='action' />
                           </Button>

@@ -61,7 +61,11 @@ export class Navbar extends Component {
                     to='/account'
                   >
                     {user ? user.first_name : 'Profile'}
-                    <AccountBoxIcon fontSize='small' color='secondary' />
+                    <AccountBoxIcon
+                      fontSize='small'
+                      color='secondary'
+                      style={{ marginLeft: '.5rem' }}
+                    />
                   </Button>
                 </Fragment>
               ) : (

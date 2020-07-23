@@ -42,10 +42,6 @@ const styles = (theme) => ({
     position: 'absolute',
     bottom: '10px',
   },
-  manageButton: {
-    color: '#fff',
-    textTransform: 'none',
-  },
   hostInfoLink: {
     textTransform: 'none',
   },
