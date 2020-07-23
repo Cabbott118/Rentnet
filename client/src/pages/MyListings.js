@@ -8,6 +8,17 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+// MUI Icons
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 // Components
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -20,7 +31,13 @@ import { getItems } from '../redux/actions/itemActions';
 const styles = (theme) => ({
   ...theme.spreadThis,
   container: {
-    padding: '2rem',
+    padding: '3rem 2rem',
+  },
+  table: {
+    backgroundColor: '#eee',
+  },
+  tableHead: {
+    backgroundColor: '#cecece',
   },
 });
 
@@ -44,38 +61,45 @@ export class MyListings extends Component {
       const userID = user._id;
       return (
         <Container className={classes.container}>
-          {items.map(
-            ({
-              _id,
-              owner_id,
-              brand,
-              trailer_type,
-              deck_dimensions,
-              weight,
-              price,
-              trailer_city,
-            }) => (
-              <Grid
-                key={_id}
-                container
-                direction='row'
-                justify='flex-start'
-                alignItems='flex-start'
-                spacing={2}
-              >
-                {userID === owner_id ? (
-                  <Fragment>
-                    <Grid item>{brand}</Grid>
-                    <Grid item>{trailer_type}</Grid>
-                    <Grid item>{deck_dimensions}</Grid>
-                    <Grid item>{weight}</Grid>
-                    <Grid item>{price}</Grid>
-                    <Grid item>{trailer_city}</Grid>
-                  </Fragment>
-                ) : null}
-              </Grid>
-            )
-          )}
+          <TableContainer component={Paper}>
+            <Table className={classes.table} size='small'>
+              <TableHead className={classes.tableHead}>
+                <TableRow>
+                  <TableCell>Trailer Type</TableCell>
+                  <TableCell align='left'>Brand</TableCell>
+                  <TableCell align='left'>Dimensions</TableCell>
+                  <TableCell align='left'>Max Weight Cap.</TableCell>
+                  <TableCell align='left'>Price ($)</TableCell>
+                  <TableCell align='left'></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {items.map((trailer) => (
+                  <TableRow key={trailer._id}>
+                    {userID === trailer.owner_id ? (
+                      <Fragment>
+                        <TableCell component='th' scope='row'>
+                          {trailer.trailer_type}
+                        </TableCell>
+                        <TableCell align='left'>{trailer.brand}</TableCell>
+                        <TableCell align='left'>
+                          {trailer.deck_dimensions}
+                        </TableCell>
+                        <TableCell align='left'>
+                          {trailer.weight} lbs.
+                        </TableCell>
+                        <TableCell align='left'>${trailer.price}</TableCell>
+                        <TableCell align='left'>
+                          <EditIcon fontSize='small' color='action' />
+                          <DeleteForeverIcon fontSize='small' color='error' />
+                        </TableCell>
+                      </Fragment>
+                    ) : null}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Container>
       );
     }

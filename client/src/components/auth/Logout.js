@@ -18,7 +18,7 @@ export class Logout extends Component {
     const { classes } = this.props;
     return (
       <Button
-        color='primary'
+        color='default'
         variant='outlined'
         onClick={this.props.logout}
         className={classes.button}
