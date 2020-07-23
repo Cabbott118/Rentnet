@@ -18,15 +18,15 @@ import Paper from '@material-ui/core/Paper';
 
 // MUI Icons
 import EditIcon from '@material-ui/icons/Edit';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 // Components
 import LoadingSpinner from '../components/LoadingSpinner';
+import ConfirmDelete from '../components/ConfirmDelete';
 
 // Redux
 import { connect } from 'react-redux';
 import { loadUser } from '../redux/actions/authActions';
-import { getItems } from '../redux/actions/itemActions';
+import { getItems, deleteItem } from '../redux/actions/itemActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -39,6 +39,9 @@ const styles = (theme) => ({
   tableHead: {
     backgroundColor: '#cecece',
   },
+  tableHeadText: {
+    fontWeight: 'bold',
+  },
 });
 
 export class MyListings extends Component {
@@ -46,6 +49,10 @@ export class MyListings extends Component {
     this.props.loadUser();
     this.props.getItems();
   }
+
+  onDeleteClick = (id) => {
+    this.props.deleteItem(id);
+  };
 
   render() {
     const {
@@ -65,12 +72,25 @@ export class MyListings extends Component {
             <Table className={classes.table} size='small'>
               <TableHead className={classes.tableHead}>
                 <TableRow>
-                  <TableCell>Trailer Type</TableCell>
-                  <TableCell align='left'>Brand</TableCell>
-                  <TableCell align='left'>Dimensions</TableCell>
-                  <TableCell align='left'>Max Weight Cap.</TableCell>
-                  <TableCell align='left'>Price ($)</TableCell>
-                  <TableCell align='left'></TableCell>
+                  <TableCell className={classes.tableHeadText}>
+                    Trailer Type
+                  </TableCell>
+                  <TableCell align='left' className={classes.tableHeadText}>
+                    Brand
+                  </TableCell>
+                  <TableCell align='left' className={classes.tableHeadText}>
+                    Dimensions
+                  </TableCell>
+                  <TableCell align='left' className={classes.tableHeadText}>
+                    Max Weight Cap.
+                  </TableCell>
+                  <TableCell align='left' className={classes.tableHeadText}>
+                    Price ($)
+                  </TableCell>
+                  <TableCell
+                    align='left'
+                    className={classes.tableHeadText}
+                  ></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -90,8 +110,11 @@ export class MyListings extends Component {
                         </TableCell>
                         <TableCell align='left'>${trailer.price}</TableCell>
                         <TableCell align='left'>
-                          <EditIcon fontSize='small' color='action' />
-                          <DeleteForeverIcon fontSize='small' color='error' />
+                          <Button>
+                            <EditIcon fontSize='small' color='action' />
+                          </Button>
+
+                          <ConfirmDelete trailer={trailer} />
                         </TableCell>
                       </Fragment>
                     ) : null}
@@ -117,6 +140,6 @@ const mapStateToProps = (state) => ({
   item: state.item,
 });
 
-export default connect(mapStateToProps, { loadUser, getItems })(
+export default connect(mapStateToProps, { loadUser, getItems, deleteItem })(
   withStyles(styles)(MyListings)
 );

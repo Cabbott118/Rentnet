@@ -49,6 +49,7 @@ const styles = (theme) => ({
   hostInfoLink: {
     textTransform: 'none',
   },
+  welcomeMessage: {},
 });
 
 export class Account extends Component {
@@ -67,7 +68,9 @@ export class Account extends Component {
       return (
         <Fragment>
           <Container className={classes.container}>
-            <Typography variant='h4'>Welcome, {user.first_name}!</Typography>
+            <Typography variant='h4' className={classes.welcomeMessage}>
+              Welcome, {user.first_name}!
+            </Typography>
             <Typography variant='h6'>Account Dashboard</Typography>
             <Typography variant='h6'>{user.email}</Typography>
             {user.is_admin ? (

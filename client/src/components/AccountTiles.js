@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 // MUI Icons
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -26,7 +27,6 @@ const styles = (theme) => ({
     padding: '2rem',
     borderBottom: '1px solid #ececec',
   },
-
   paper: {
     height: '100px',
     width: '100px',
@@ -66,94 +66,104 @@ export class AccountTiles extends Component {
             spacing={2}
           >
             <Grid item>
-              <Paper elevation={3} className={classes.paper}>
-                <AccountBoxIcon
-                  color='primary'
-                  fontSize='large'
-                  className={classes.icon}
-                />
-                <Typography
-                  variant='body2'
-                  color='textSecondary'
-                  align='center'
-                  className={classes.tileText}
-                >
-                  Account Information
-                </Typography>
-              </Paper>
+              <Button style={{ textTransform: 'none' }}>
+                <Paper elevation={3} className={classes.paper}>
+                  <AccountBoxIcon
+                    color='primary'
+                    fontSize='large'
+                    className={classes.icon}
+                  />
+                  <Typography
+                    variant='body2'
+                    color='textSecondary'
+                    align='center'
+                    className={classes.tileText}
+                  >
+                    Account Information
+                  </Typography>
+                </Paper>
+              </Button>
             </Grid>
             <Grid item>
-              <Paper elevation={3} className={classes.paper}>
-                <EditIcon
-                  color='primary'
-                  fontSize='large'
-                  className={classes.icon}
-                />
-                <Typography
-                  variant='body2'
-                  color='textSecondary'
-                  align='center'
-                  className={classes.tileText}
-                >
-                  Edit Account Details
-                </Typography>
-              </Paper>
+              <Button style={{ textTransform: 'none' }}>
+                <Paper elevation={3} className={classes.paper}>
+                  <EditIcon
+                    color='primary'
+                    fontSize='large'
+                    className={classes.icon}
+                  />
+                  <Typography
+                    variant='body2'
+                    color='textSecondary'
+                    align='center'
+                    className={classes.tileText}
+                  >
+                    Edit Account Details
+                  </Typography>
+                </Paper>
+              </Button>
             </Grid>
 
             {user.is_host ? (
               <Fragment>
                 <Grid item component={Link} to='/addlisting'>
-                  <Paper elevation={3} className={classes.paper}>
-                    <PostAddIcon
-                      color='primary'
-                      fontSize='large'
-                      className={classes.icon}
-                    />
-                    <Typography
-                      variant='body2'
-                      color='textSecondary'
-                      align='center'
-                      className={classes.tileText}
-                    >
-                      Create New Listing
-                    </Typography>
-                  </Paper>
+                  <Button style={{ textTransform: 'none' }}>
+                    <Paper elevation={3} className={classes.paper}>
+                      <PostAddIcon
+                        color='primary'
+                        fontSize='large'
+                        className={classes.icon}
+                      />
+                      <Typography
+                        variant='body2'
+                        color='textSecondary'
+                        align='center'
+                        className={classes.tileText}
+                      >
+                        Create New Listing
+                      </Typography>
+                    </Paper>
+                  </Button>
                 </Grid>
                 <Grid item component={Link} to='/mylistings'>
-                  <Paper elevation={3} className={classes.paper}>
-                    <ViewListIcon
-                      color='primary'
-                      fontSize='large'
-                      className={classes.icon}
-                    />
-                    <Typography
-                      variant='body2'
-                      color='textSecondary'
-                      align='center'
-                      className={classes.tileText}
-                    >
-                      Manage Listings
-                    </Typography>
-                  </Paper>
+                  <Button style={{ textTransform: 'none' }}>
+                    <Paper elevation={3} className={classes.paper}>
+                      <ViewListIcon
+                        color='primary'
+                        fontSize='large'
+                        className={classes.icon}
+                      />
+                      <Typography
+                        variant='body2'
+                        color='textSecondary'
+                        align='center'
+                        className={classes.tileText}
+                      >
+                        Manage Listings
+                      </Typography>
+                    </Paper>
+                  </Button>
                 </Grid>
               </Fragment>
             ) : null}
             <Grid item>
-              <Paper elevation={3} className={classes.paper}>
-                <SettingsIcon
-                  color='primary'
-                  fontSize='large'
-                  className={classes.icon}
-                />
-                <Typography
-                  variant='body2'
-                  color='textSecondary'
-                  align='center'
-                  className={classes.tileText}
-                >
-                  Account Settings
-                </Typography>
-              </Paper>
+              <Button style={{ textTransform: 'none' }}>
+                <Paper elevation={3} className={classes.paper}>
+                  <SettingsIcon
+                    color='primary'
+                    fontSize='large'
+                    className={classes.icon}
+                  />
+                  <Typography
+                    variant='body2'
+                    color='textSecondary'
+                    align='center'
+                    className={classes.tileText}
+                  >
+                    Account Settings
+                  </Typography>
+                </Paper>
+              </Button>
             </Grid>
           </Grid>
         </Container>
