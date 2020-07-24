@@ -84,7 +84,7 @@ export class AccountTiles extends Component {
                 </Paper>
               </Button>
             </Grid>
-            <Grid item>
+            <Grid item component={Link} to='edituser'>
               <Button style={{ textTransform: 'none' }}>
                 <Paper elevation={3} className={classes.paper}>
                   <EditIcon

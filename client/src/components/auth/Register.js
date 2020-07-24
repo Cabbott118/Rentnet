@@ -115,14 +115,6 @@ class Register extends Component {
 
     return (
       <Fragment>
-        {/* <Button
-          onClick={this.handleOpen}
-          color='primary'
-          variant='text'
-          className={classes.button}
-        >
-          Sign Up
-        </Button> */}
         <MyButton
           onClick={this.handleOpen}
           color='primary'

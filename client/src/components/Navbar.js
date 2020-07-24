@@ -60,12 +60,12 @@ export class Navbar extends Component {
                     component={Link}
                     to='/account'
                   >
-                    {user ? user.first_name : 'Profile'}
                     <AccountBoxIcon
                       fontSize='small'
                       color='secondary'
-                      style={{ marginLeft: '.5rem' }}
+                      style={{ marginRight: '.5rem' }}
                     />
+                    {user ? user.first_name : 'Profile'}
                   </Button>
                 </Fragment>
               ) : (

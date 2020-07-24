@@ -15,6 +15,7 @@ import HostInfo from './pages/HostInfo';
 import Listings from './pages/Listings';
 import AboutUs from './pages/AboutUs';
 import Success from './pages/Success';
+import EditUser from './pages/EditUser';
 import UnderConstruction from './pages/UnderConstruction';
 
 // Redux
@@ -49,6 +50,7 @@ class App extends Component {
               <Route exact path='/listings' component={Listings} />
               <Route exact path='/aboutus' component={AboutUs} />
               <Route exact path='/success' component={Success} />
+              <Route exact path='/edituser' component={EditUser} />
               <Route
                 exact
                 path='/underconstruction'

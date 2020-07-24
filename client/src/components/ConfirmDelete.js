@@ -28,7 +28,7 @@ const styles = (theme) => ({
     textTransform: 'none',
   },
   buttonGroup: {
-    marginTop: '2rem',
+    margin: '2rem 0 1rem',
   },
   progressSpinner: {
     position: 'absolute',

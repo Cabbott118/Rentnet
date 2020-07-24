@@ -7,6 +7,7 @@ const auth = require('../../middleware/auth');
 
 // User Model
 const User = require('../../models/User');
+const { update } = require('../../models/User');
 
 // @route  POST api/auth
 // @desc   Authenticate User
@@ -73,10 +74,24 @@ router.put('/:_id', auth, (req, res) => {
     () => {}
   )
     .then((updatedUser) => {
+      // Create salt & hash
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(updatedUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          // Hash password
+          updatedUser.password = hash;
+          // After hash is complete, save updatedUser object
+          updatedUser.save();
+          console.log(updatedUser);
+        });
+      });
+
       res.json(updatedUser); //we capture this via our promise-handler on the action
     })
     .catch((error) => {
-      return res.status(400).json({ couldnotupdate: 'could not update item' });
+      return res.status(400).json({
+        couldnotupdate: 'Your account could not be updated. Please try again.',
+      });
     });
 });
 
