@@ -123,9 +123,6 @@ export class EditUser extends Component {
     } else {
       return (
         <Container className={classes.container}>
-          <Typography variant='h6' color='error'>
-            USE AT YOUR OWN RISK, NOT FINISHED YET
-          </Typography>
           <Grid
             container
             direction='row'
@@ -160,18 +157,6 @@ export class EditUser extends Component {
                   Change Password
                 </Typography>
                 <TextField
-                  name='current_password'
-                  type='password'
-                  label='Current Password'
-                  placeholder='Password'
-                  variant='outlined'
-                  size='small'
-                  className={classes.textField}
-                  onChange={this.handleChange}
-                  helperText='Your current password is required to make any changes'
-                  fullWidth
-                />
-                <TextField
                   name='new_password'
                   type='password'
                   label='New Password'
@@ -193,6 +178,28 @@ export class EditUser extends Component {
                   onChange={this.handleChange}
                   fullWidth
                 />
+                <Typography variant='h6' className={classes.seperator}>
+                  Current Password
+                </Typography>
+                <TextField
+                  name='current_password'
+                  type='password'
+                  label='Current Password'
+                  placeholder='Password'
+                  variant='outlined'
+                  size='small'
+                  className={classes.textField}
+                  onChange={this.handleChange}
+                  //   helperText='Your current password is required to make any changes'
+                  fullWidth
+                />
+                <Typography
+                  variant='subtitle2'
+                  color='error'
+                  style={{ marginLeft: '1rem' }}
+                >
+                  Required *
+                </Typography>
                 {msg === null ? null : <Alert severity='error'>{msg}</Alert>}
                 <Grid
                   container
