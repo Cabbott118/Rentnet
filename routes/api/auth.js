@@ -7,7 +7,6 @@ const auth = require('../../middleware/auth');
 
 // User Model
 const User = require('../../models/User');
-const { update } = require('../../models/User');
 
 // @route  POST api/auth
 // @desc   Authenticate User
@@ -63,7 +62,7 @@ router.get('/user', auth, (req, res) => {
 });
 
 // @route  PUT api/auth/:id
-// @desc   Edit A User
+// @desc   Edit A User (Become Host)
 // @access Private
 router.put('/:_id', auth, (req, res) => {
   //this returns a promise
@@ -74,18 +73,7 @@ router.put('/:_id', auth, (req, res) => {
     () => {}
   )
     .then((updatedUser) => {
-      // Create salt & hash
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(updatedUser.password, salt, (err, hash) => {
-          if (err) throw err;
-          // Hash password
-          updatedUser.password = hash;
-          // After hash is complete, save updatedUser object
-          updatedUser.save();
-          console.log(updatedUser);
-        });
-      });
-
+      console.log('User updated auccessfully. Host mode enabled.');
       res.json(updatedUser); //we capture this via our promise-handler on the action
     })
     .catch((error) => {
@@ -93,6 +81,51 @@ router.put('/:_id', auth, (req, res) => {
         couldnotupdate: 'Your account could not be updated. Please try again.',
       });
     });
+});
+
+// @route  PUT api/auth/edit/:id
+// @desc   Edit A User (Password Edit)
+// @access Private
+router.put('/edit/:_id', auth, (req, res) => {
+  const { email, current_password } = req.body;
+
+  User.findOne({ email }).then((user) => {
+    bcrypt.compare(current_password, user.password).then((isMatch) => {
+      if (!isMatch) return res.status(400).json({ msg: 'Incorrect password' });
+
+      // Create salt & hash
+      bcrypt.genSalt(10, (err, salt) => {
+        if (req.body.new_password === '') {
+          req.body.password = req.body.current_password;
+        } else {
+          req.body.password = req.body.new_password;
+        }
+        bcrypt.hash(req.body.password, salt, (err, hash) => {
+          if (err) throw err;
+          // Hash password
+          req.body.password = hash;
+
+          //this returns a promise
+          User.findByIdAndUpdate(
+            req.params._id,
+            req.body,
+            { new: false, useFindAndModify: false },
+            () => {}
+          )
+            .then((updatedUser) => {
+              console.log(updatedUser);
+              res.json(updatedUser); //we capture this via our promise-handler on the action
+            })
+            .catch((error) => {
+              return res.status(400).json({
+                couldnotupdate:
+                  'Your account could not be updated. Please try again.',
+              });
+            });
+        });
+      });
+    });
+  });
 });
 
 module.exports = router;

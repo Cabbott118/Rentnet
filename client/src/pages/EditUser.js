@@ -16,7 +16,7 @@ import Alert from '@material-ui/lab/Alert';
 
 // Redux
 import { connect } from 'react-redux';
-import { loadUser, editUser } from '../redux/actions/authActions';
+import { loadUser, editUserDetails } from '../redux/actions/authActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -37,7 +37,6 @@ export class EditUser extends Component {
   state = {
     new_first_name: '',
     new_last_name: '',
-    new_email: '',
     current_password: '',
     new_password: '',
     confirm_new_password: '',
@@ -65,16 +64,23 @@ export class EditUser extends Component {
     const {
       new_first_name,
       new_last_name,
-      new_email,
       current_password,
       new_password,
       confirm_new_password,
     } = this.state;
 
+    // if (current_password === '') {
+    //   this.setState({
+    //     msg: 'Your current password is required.',
+    //   });
+    //   return false;
+    // }
+
     if (new_password !== confirm_new_password) {
       this.setState({
         msg: 'Passwords must match',
       });
+      return false;
     }
 
     // Init updatedUser object and check if state values are empty
@@ -83,19 +89,15 @@ export class EditUser extends Component {
       id: _id,
       first_name: new_first_name === '' ? first_name : new_first_name,
       last_name: new_last_name === '' ? last_name : new_last_name,
-      email: new_email === '' ? email : new_email,
-      password:
-        new_password === confirm_new_password &&
-        new_password !== '' &&
-        confirm_new_password !== ''
-          ? new_password
-          : current_password,
+      email,
+      current_password: current_password,
+      new_password: new_password,
     };
-
-    this.props.editUser(updatedUser);
+    this.props.editUserDetails(updatedUser);
   };
 
   render() {
+    console.log(this.props);
     const {
       classes,
       auth: { user, isLoading },
@@ -141,16 +143,6 @@ export class EditUser extends Component {
                   onChange={this.handleChange}
                   fullWidth
                 />
-                <TextField
-                  name='new_email'
-                  type='email'
-                  label='Email Address'
-                  variant='outlined'
-                  size='small'
-                  className={classes.textField}
-                  onChange={this.handleChange}
-                  fullWidth
-                />
                 <Typography variant='h6' className={classes.seperator}>
                   Change Password
                 </Typography>
@@ -163,6 +155,7 @@ export class EditUser extends Component {
                   size='small'
                   className={classes.textField}
                   onChange={this.handleChange}
+                  helperText='Your current password is required to make any changes'
                   fullWidth
                 />
                 <TextField
@@ -266,7 +259,7 @@ EditUser.propTypes = {
   auth: PropTypes.object.isRequired,
   error: PropTypes.object.isRequired,
   loadUser: PropTypes.func.isRequired,
-  editUser: PropTypes.func.isRequired,
+  editUserDetails: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -274,6 +267,6 @@ const mapStateToProps = (state) => ({
   error: state.error,
 });
 
-export default connect(mapStateToProps, { loadUser, editUser })(
+export default connect(mapStateToProps, { loadUser, editUserDetails })(
   withStyles(styles)(EditUser)
 );

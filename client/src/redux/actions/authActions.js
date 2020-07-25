@@ -97,11 +97,27 @@ export const login = ({ email, password }) => (dispatch) => {
     });
 };
 
-// Edit User
+// Edit User (Become Host)
 export const editUser = (user) => (dispatch, getState) => {
   axios
     // Attaching token to request in header
     .put(`/api/auth/${user.id}`, user, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: EDIT_USER,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+// Edit User (Password Edit)
+export const editUserDetails = (user) => (dispatch, getState) => {
+  axios
+    // Attaching token to request in header
+    .put(`/api/auth/edit/${user.id}`, user, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: EDIT_USER,
