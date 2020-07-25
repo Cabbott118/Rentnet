@@ -91,7 +91,8 @@ router.put('/edit/:_id', auth, (req, res) => {
 
   User.findOne({ email }).then((user) => {
     bcrypt.compare(current_password, user.password).then((isMatch) => {
-      if (!isMatch) return res.status(400).json({ msg: 'Incorrect password' });
+      if (!isMatch)
+        return res.status(400).json({ msg: 'Incorrect current password' });
 
       // Create salt & hash
       bcrypt.genSalt(10, (err, salt) => {

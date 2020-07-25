@@ -69,16 +69,16 @@ export class EditUser extends Component {
       confirm_new_password,
     } = this.state;
 
-    // if (current_password === '') {
-    //   this.setState({
-    //     msg: 'Your current password is required.',
-    //   });
-    //   return false;
-    // }
+    if (current_password === '') {
+      this.setState({
+        msg: 'Your current password is required to make any changes',
+      });
+      return false;
+    }
 
     if (new_password !== confirm_new_password) {
       this.setState({
-        msg: 'Passwords must match',
+        msg: 'New passwords must match',
       });
       return false;
     }
@@ -94,7 +94,20 @@ export class EditUser extends Component {
       new_password: new_password,
     };
     this.props.editUserDetails(updatedUser);
+    window.location.href = '/success';
   };
+
+  componentDidUpdate(prevProps) {
+    const { error } = this.props;
+    if (error !== prevProps.error) {
+      // Check for edit error error
+      if (error.id === 'EDIT_ERROR') {
+        this.setState({ msg: error.msg.msg });
+      } else {
+        this.setState({ msg: null });
+      }
+    }
+  }
 
   render() {
     console.log(this.props);

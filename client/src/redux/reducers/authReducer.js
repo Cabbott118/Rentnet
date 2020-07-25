@@ -8,6 +8,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   EDIT_USER,
+  EDIT_ERROR,
 } from '../actions/constants';
 
 const initialState = {
@@ -62,6 +63,10 @@ export default function (state = initialState, action) {
         isLoading: false,
       };
     case EDIT_USER:
+      return {
+        ...state,
+      };
+    case EDIT_ERROR:
       return {
         ...state,
       };

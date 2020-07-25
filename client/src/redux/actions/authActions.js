@@ -10,6 +10,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   EDIT_USER,
+  EDIT_ERROR,
 } from '../actions/constants';
 
 // Check token and load user
@@ -108,9 +109,14 @@ export const editUser = (user) => (dispatch, getState) => {
         payload: res.data,
       })
     )
-    .catch((err) =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    .catch((err) => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, 'EDIT_ERROR')
+      );
+      dispatch({
+        type: EDIT_ERROR,
+      });
+    });
 };
 
 // Edit User (Password Edit)
@@ -124,9 +130,14 @@ export const editUserDetails = (user) => (dispatch, getState) => {
         payload: res.data,
       })
     )
-    .catch((err) =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    .catch((err) => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, 'EDIT_ERROR')
+      );
+      dispatch({
+        type: EDIT_ERROR,
+      });
+    });
 };
 
 // Logout User
