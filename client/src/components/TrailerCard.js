@@ -18,7 +18,7 @@ import LoadingSpinner from './LoadingSpinner';
 // Redux
 import { connect } from 'react-redux';
 import { loadUser } from '../redux/actions/authActions';
-import { getItems } from '../redux/actions/itemActions';
+import { getFilteredItems, getItems } from '../redux/actions/itemActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -42,12 +42,27 @@ const styles = (theme) => ({
 });
 
 export class TrailerCard extends Component {
+  state = {
+    search_location: '',
+  };
+
   componentDidMount() {
+    let search = JSON.parse(localStorage.getItem('search_location'));
+    localStorage.removeItem('search_location');
     this.props.loadUser();
-    this.props.getItems();
+
+    this.setState({
+      search_location: search,
+    });
+    if (!search) {
+      this.props.getItems();
+    } else {
+      this.props.getFilteredItems(search);
+    }
   }
 
   render() {
+    const { search_location } = this.state;
     const {
       classes,
       item: { items, loading },
@@ -121,7 +136,7 @@ export class TrailerCard extends Component {
                               color='primary'
                               className={classes.trailerButton}
                               component={Link}
-                              to={`/listings/${_id}`}
+                              to={`/search/${search_location}/${_id}`}
                             >
                               More Info
                               <InfoIcon
@@ -149,6 +164,7 @@ export class TrailerCard extends Component {
 TrailerCard.propTypes = {
   auth: PropTypes.object.isRequired,
   loadUser: PropTypes.func.isRequired,
+  getFilteredItems: PropTypes.func.isRequired,
   getItems: PropTypes.func.isRequired,
 };
 
@@ -157,6 +173,8 @@ const mapStateToProps = (state) => ({
   item: state.item,
 });
 
-export default connect(mapStateToProps, { loadUser, getItems })(
-  withStyles(styles)(TrailerCard)
-);
+export default connect(mapStateToProps, {
+  loadUser,
+  getFilteredItems,
+  getItems,
+})(withStyles(styles)(TrailerCard));

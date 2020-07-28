@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 
@@ -47,11 +46,6 @@ export class TrailerPage extends Component {
     const trailerId = this.props.match.params.id;
     if (trailerId) this.setState({ trailerIdParam: trailerId });
     this.props.getItemById(trailerId);
-
-    // TODO: Decide between setting timeout to ensure data has time to
-    //       load, or pulling trailer data from props
-    //       *** Data already accessible via both methods in current
-    //            set up ***
     setTimeout(() => {
       this.setState({ loading: false, trailer: this.props.item.item[0] });
     }, 1000);
@@ -75,14 +69,16 @@ export class TrailerPage extends Component {
       currently_available,
     } = trailer;
 
-    return (
+    // Find a way to safely go back to corrent page
+    // *** BUG: When going back from Location searched entry, all trailers appear
+
+    TODO: return (
       <Fragment>
         <Container className={classes.container}>
           <Button
             variant='text'
             className={classes.button}
-            component={Link}
-            to='/listings'
+            onClick={this.props.history.goBack}
           >
             <KeyboardReturnIcon
               fontSize='small'

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 
@@ -50,18 +49,6 @@ export class Hero extends Component {
             color='secondary'
           >
             Renting trailers is now as simple as clicking a button!
-          </Typography>
-          <Typography variant='subtitle1' color='secondary'>
-            Browse our listings by searching below (currently not hooked up), or
-            click{' '}
-            <Typography
-              component={Link}
-              to='/listings'
-              style={{ textDecoration: 'none', color: '#FF6E3F' }}
-            >
-              HERE
-            </Typography>{' '}
-            to view all.
           </Typography>
         </Grid>
         <Grid

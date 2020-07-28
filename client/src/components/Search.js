@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import PropTypes from 'prop-types';
 
 // MUI
 import TextField from '@material-ui/core/TextField';
 
 // Redux
 import { connect } from 'react-redux';
-import { getFilteredItems } from '../redux/actions/itemActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -36,14 +34,18 @@ export class Search extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    const { location } = this.state;
-    localStorage.setItem('search_location', JSON.stringify(location));
-    this.props.getFilteredItems(location);
-    // window.location.href = `/listings/${location}`;
+    let { location } = this.state;
+
+    if (location === '') {
+      window.location.href = '/search';
+    } else {
+      location = location.charAt(0).toUpperCase() + location.slice(1);
+      localStorage.setItem('search_location', JSON.stringify(location));
+      window.location.href = `/search/${location}`;
+    }
   };
 
   render() {
-    console.log(this.props);
     const { classes } = this.props;
     return (
       <form onSubmit={this.onSubmit}>
@@ -68,14 +70,10 @@ export class Search extends Component {
   }
 }
 
-Search.propTypes = {
-  getFilteredItems: PropTypes.func.isRequired,
-};
+Search.propTypes = {};
 
 const mapStateToProps = (state) => ({
   items: state.item,
 });
 
-export default connect(mapStateToProps, { getFilteredItems })(
-  withStyles(styles)(Search)
-);
+export default connect(mapStateToProps, {})(withStyles(styles)(Search));

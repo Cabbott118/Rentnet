@@ -24,7 +24,6 @@ router.get('/', (req, res) => {
 // @desc   Get Filtered Items
 // @access Public
 router.get('/:trailer_city', (req, res) => {
-  console.log(req.params);
   // Get items and sort
   Trailer.find(req.params)
     .sort({ date: -1 })
@@ -35,7 +34,6 @@ router.get('/:trailer_city', (req, res) => {
 // @desc   Get Filtered Items
 // @access Public
 router.get('/match/:_id', (req, res) => {
-  console.log(req.params);
   // Get items and sort
   Trailer.find(req.params)
     .sort({ date: -1 })

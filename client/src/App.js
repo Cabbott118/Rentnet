@@ -48,8 +48,13 @@ class App extends Component {
               <Route exact path='/addlisting' component={AddListingForm} />
               <Route exact path='/mylistings' component={MyListings} />
               <Route exact path='/hostinfo' component={HostInfo} />
-              <Route exact path='/listings' component={Listings} />
-              <Route exact path='/listings/:id' component={TrailerPage} />
+              <Route exact path='/search' component={Listings} />
+              <Route exact path='/search/:trailer_city' component={Listings} />
+              <Route
+                exact
+                path='/search/:trailer_city/:id'
+                component={TrailerPage}
+              />
               <Route exact path='/aboutus' component={AboutUs} />
               <Route exact path='/success' component={Success} />
               <Route exact path='/edituser' component={EditUser} />
