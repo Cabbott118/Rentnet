@@ -44,10 +44,15 @@ class App extends Component {
             <Navbar />
             <div className='App'>
               <Route exact path='/' component={Home} />
+
+              {/* Account Specific */}
               <Route exact path='/account' component={Account} />
               <Route exact path='/addlisting' component={AddListingForm} />
               <Route exact path='/mylistings' component={MyListings} />
               <Route exact path='/hostinfo' component={HostInfo} />
+              <Route exact path='/edituser' component={EditUser} />
+
+              {/* Trailer listings / searches */}
               <Route exact path='/search' component={Listings} />
               <Route exact path='/search/:trailer_city' component={Listings} />
               <Route
@@ -55,9 +60,10 @@ class App extends Component {
                 path='/search/:trailer_city/:id'
                 component={TrailerPage}
               />
+
+              {/* Misc routes */}
               <Route exact path='/aboutus' component={AboutUs} />
               <Route exact path='/success' component={Success} />
-              <Route exact path='/edituser' component={EditUser} />
               <Route
                 exact
                 path='/underconstruction'

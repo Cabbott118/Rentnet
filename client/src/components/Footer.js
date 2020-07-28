@@ -111,7 +111,7 @@ export class Footer extends Component {
                 <Typography
                   variant='body2'
                   component={Link}
-                  to='/listings'
+                  to='/search'
                   className={classes.links}
                 >
                   Listings
