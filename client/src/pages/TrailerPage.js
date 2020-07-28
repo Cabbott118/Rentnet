@@ -24,7 +24,7 @@ import { getItemById } from '../redux/actions/itemActions';
 const styles = (theme) => ({
   ...theme.spreadThis,
   container: {
-    padding: '2rem 3rem',
+    padding: '1rem 3rem',
   },
   containerLower: {
     padding: '0 3rem',
@@ -58,12 +58,8 @@ export class TrailerPage extends Component {
   }
 
   render() {
-    console.log(this.state);
-    const { loading } = this.state;
-    const {
-      classes,
-      item: { item },
-    } = this.props;
+    const { loading, trailer } = this.state;
+    const { classes } = this.props;
 
     if (loading) {
       return <LoadingSpinner loading={loading} />;
@@ -77,7 +73,7 @@ export class TrailerPage extends Component {
       trailer_city,
       trailer_state,
       currently_available,
-    } = item[0];
+    } = trailer;
 
     return (
       <Fragment>

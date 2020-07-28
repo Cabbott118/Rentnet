@@ -110,7 +110,6 @@ export class EditUser extends Component {
   }
 
   render() {
-    console.log(this.props);
     const {
       classes,
       auth: { user, isLoading },

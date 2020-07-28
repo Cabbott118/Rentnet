@@ -37,11 +37,13 @@ export class Search extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const { location } = this.state;
-    console.log(location);
     localStorage.setItem('search_location', JSON.stringify(location));
+    this.props.getFilteredItems(location);
+    // window.location.href = `/listings/${location}`;
   };
 
   render() {
+    console.log(this.props);
     const { classes } = this.props;
     return (
       <form onSubmit={this.onSubmit}>
@@ -71,7 +73,7 @@ Search.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  filtered_results: state.item.filtered_results,
+  items: state.item,
 });
 
 export default connect(mapStateToProps, { getFilteredItems })(

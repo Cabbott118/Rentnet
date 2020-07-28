@@ -16,11 +16,11 @@ const styles = (theme) => ({
   ...theme.spreadThis,
   container: {
     padding: '2rem',
-    backgroundColor: '#E1D0C7',
-    borderTop: '5px solid #C3A798',
+    backgroundColor: '#ddd',
+    borderTop: '5px solid #fff',
   },
   footerLead: {
-    borderBottom: '2px solid #fff',
+    borderBottom: '2px solid #ff6e3f',
   },
   footerItems: {
     padding: '1rem',
