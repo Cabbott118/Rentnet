@@ -69,10 +69,7 @@ export class TrailerPage extends Component {
       currently_available,
     } = trailer;
 
-    // Find a way to safely go back to corrent page
-    // *** BUG: When going back from Location searched entry, all trailers appear
-
-    TODO: return (
+    return (
       <Fragment>
         <Container className={classes.container}>
           <Button

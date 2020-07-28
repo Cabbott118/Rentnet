@@ -48,7 +48,6 @@ export class TrailerCard extends Component {
 
   componentDidMount() {
     let search = JSON.parse(localStorage.getItem('search_location'));
-    localStorage.removeItem('search_location');
     this.props.loadUser();
 
     this.setState({
@@ -62,7 +61,6 @@ export class TrailerCard extends Component {
   }
 
   render() {
-    const { search_location } = this.state;
     const {
       classes,
       item: { items, loading },
@@ -136,7 +134,7 @@ export class TrailerCard extends Component {
                               color='primary'
                               className={classes.trailerButton}
                               component={Link}
-                              to={`/search/${search_location}/${_id}`}
+                              to={`/search/${trailer_city}/${_id}`}
                             >
                               More Info
                               <InfoIcon

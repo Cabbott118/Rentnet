@@ -10,7 +10,6 @@ import {
 
 const initialState = {
   items: [],
-  filtered_results: [],
   item: {},
   loading: false,
 };

@@ -34,6 +34,9 @@ export class Search extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+
+    localStorage.removeItem('search_location');
+
     let { location } = this.state;
 
     if (location === '') {
