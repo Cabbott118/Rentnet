@@ -1,6 +1,7 @@
 import {
   GET_ITEMS,
   GET_FILTERED_ITEMS,
+  GET_ITEM_BY_ID,
   ADD_ITEM,
   EDIT_ITEM,
   DELETE_ITEM,
@@ -9,6 +10,7 @@ import {
 
 const initialState = {
   items: [],
+  item: {},
   loading: false,
 };
 
@@ -26,7 +28,15 @@ export default function (state = initialState, action) {
     case GET_FILTERED_ITEMS:
       return {
         ...state,
-        filtered_results: action.payload,
+        items: action.payload,
+        loading: false,
+      };
+
+    case GET_ITEM_BY_ID:
+      return {
+        ...state,
+        // Load single object into item field
+        item: action.payload,
         loading: false,
       };
 

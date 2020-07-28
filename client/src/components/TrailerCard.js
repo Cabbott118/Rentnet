@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 
@@ -42,10 +42,6 @@ const styles = (theme) => ({
 });
 
 export class TrailerCard extends Component {
-  state = {
-    open: false,
-  };
-
   componentDidMount() {
     this.props.loadUser();
     this.props.getItems();
@@ -124,6 +120,8 @@ export class TrailerCard extends Component {
                               variant='outlined'
                               color='primary'
                               className={classes.trailerButton}
+                              component={Link}
+                              to={`/listings/${_id}`}
                             >
                               More Info
                               <InfoIcon

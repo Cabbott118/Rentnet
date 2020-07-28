@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
   GET_ITEMS,
   GET_FILTERED_ITEMS,
+  GET_ITEM_BY_ID,
   ADD_ITEM,
   EDIT_ITEM,
   DELETE_ITEM,
@@ -35,6 +36,22 @@ export const getFilteredItems = (data) => (dispatch) => {
     .then((res) =>
       dispatch({
         type: GET_FILTERED_ITEMS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+// Go to itemReducer and check type
+export const getItemById = (data) => (dispatch) => {
+  dispatch(setItemsLoading());
+  axios // Proxy giving ability to shorten endpoint
+    .get(`/api/trailers/match/${data}`)
+    .then((res) =>
+      dispatch({
+        type: GET_ITEM_BY_ID,
         payload: res.data,
       })
     )

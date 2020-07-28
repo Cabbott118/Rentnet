@@ -34,6 +34,7 @@ const TrailerInformation = (props) => {
     activeStep,
     classes,
   } = props;
+
   return (
     <Container>
       <TextField

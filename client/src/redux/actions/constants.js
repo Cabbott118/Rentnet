@@ -1,5 +1,6 @@
 export const GET_ITEMS = 'GET_ITEMS';
 export const GET_FILTERED_ITEMS = 'GET_FILTERED_ITEMS';
+export const GET_ITEM_BY_ID = 'GET_ITEM_BY_ID';
 export const SEARCH_ITEMS = 'SEARCH_ITEMS';
 export const ADD_ITEM = 'ADD_ITEM';
 export const EDIT_ITEM = 'EDIT_ITEM';

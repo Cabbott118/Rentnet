@@ -43,7 +43,7 @@ export class Account extends Component {
       return (
         <Container className={classes.container}>
           <Typography variant='h6' color='textPrimary' align='center'>
-            Congratulations! Your changes have successfully been made.
+            Success! Your changes have been made.
           </Typography>
           <Grid
             container
