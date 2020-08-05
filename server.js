@@ -20,8 +20,14 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use('/api/trailers', require('./routes/api/trailers'));
+app.use('/api/images', require('./routes/api/images'));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
+
+// Static uploads folder
+// Use "path" property stored in Images collection to correctly display image
+// src='\uploads\image-1593461437399.png'               <------- EXAMPLE ****
+app.use('/uploads', express.static('uploads'));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {

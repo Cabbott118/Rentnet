@@ -10,37 +10,37 @@ const Trailer = require('../../models/Trailer');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-// @route  GET api/items
+// @route  GET api/trailers
 // @desc   Get All Items
 // @access Public
 router.get('/', (req, res) => {
-  // Get items and sort
+  // Get trailers and sort
   Trailer.find()
     .sort({ trailer_type: 1 })
-    .then((items) => res.json(items));
+    .then((trailers) => res.json(trailers));
 });
 
-// @route  GET api/items
+// @route  GET api/trailers
 // @desc   Get Filtered Items
 // @access Public
 router.get('/:trailer_city', (req, res) => {
-  // Get items and sort
+  // Get trailers and sort
   Trailer.find(req.params)
     .sort({ date: -1 })
-    .then((items) => res.json(items));
+    .then((trailers) => res.json(trailers));
 });
 
-// @route  GET api/items
+// @route  GET api/trailers
 // @desc   Get Filtered Items
 // @access Public
 router.get('/match/:_id', (req, res) => {
-  // Get items and sort
+  // Get trailers and sort
   Trailer.find(req.params)
     .sort({ date: -1 })
-    .then((items) => res.json(items));
+    .then((trailers) => res.json(trailers));
 });
 
-// @route  POST api/items
+// @route  POST api/trailers
 // @desc   Create An Item
 // @access Private
 router.post('/', auth, (req, res) => {
@@ -58,10 +58,10 @@ router.post('/', auth, (req, res) => {
     currently_available: req.body.currently_available,
     date: req.body.date,
   });
-  newTrailer.save().then((item) => res.json(item));
+  newTrailer.save().then((trailers) => res.json(trailers));
 });
 
-// @route  PUT api/items
+// @route  PUT api/trailers
 // @desc   Edit An Item
 // @access Private
 router.put('/:_id', auth, (req, res) => {
@@ -72,23 +72,23 @@ router.put('/:_id', auth, (req, res) => {
     { new: false, useFindAndModify: false },
     () => {}
   )
-    .then((updatedItem) => {
-      res.json(updatedItem); //we capture this via our promise-handler on the action
+    .then((updatedTrailer) => {
+      res.json(updatedTrailer); //we capture this via our promise-handler on the action
     })
     .catch((error) => {
       return res.status(400).json({ couldnotupdate: 'could not update item' });
     });
 });
 
-// @route  DELETE api/items
+// @route  DELETE api/trailers
 // @desc   Delete An Item
 // @access Private
 router.delete('/:id', auth, (req, res) => {
-  // Find item to delete by ID
+  // Find trailers to delete by ID
   Trailer.findById(req.params.id)
     // Remove Item from DB
-    .then((item) =>
-      item
+    .then((trailer) =>
+      trailer
         .remove()
         // Send Success message if success || Not Found if failed
         .then(() => res.json({ success: true }))

@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const TrailerSchema = new Schema({
+  image: {
+    type: String,
+    required: true,
+  },
   brand: {
     type: String,
     required: true,
