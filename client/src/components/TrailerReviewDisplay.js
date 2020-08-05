@@ -40,50 +40,78 @@ const HostReviewDisplay = (props) => {
       <Typography align='center'>
         Please review your updated information before confirming.
       </Typography>
-      <Grid container spacing={3} className={classes.gridContainer}>
-        <Grid item xs={12} md={4}>
-          <Paper className={classes.paper}>
-            <Typography variant='h6' align='center' color='textPrimary'>
-              Address:
-            </Typography>
-            <Typography variant='body1' align='center'>
-              {trailer_address}
-            </Typography>
-
-            <Typography variant='body1' align='center'>
-              {trailer_city}, {trailer_state} {trailer_zip}
-            </Typography>
-          </Paper>
+      <Grid
+        container
+        direction='row'
+        justify='center'
+        alignItems='flex-start'
+        spacing={2}
+        className={classes.gridContainer}
+      >
+        <Grid item>
+          <Grid
+            container
+            direction='column'
+            justify='center'
+            alignItems='center'
+          >
+            <Grid item>
+              <Typography variant='h6' align='center' color='textPrimary'>
+                Preferred Pick Up & Drop Off Address:
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant='body1' align='center'>
+                {trailer_address}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant='body1' align='center'>
+                {trailer_city}, {trailer_state} {trailer_zip}
+              </Typography>
+            </Grid>
+          </Grid>
         </Grid>
 
-        <Grid item xs={12} md={4}>
-          <Paper className={classes.paper}>
-            <Typography variant='h6' align='center' color='textPrimary'>
-              Brand:
-            </Typography>
-            <Typography variant='body1' align='center'>
-              {brand}
-            </Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Paper className={classes.paper}>
-            <Typography variant='h6' align='center' color='textPrimary'>
-              Other Information:
-            </Typography>
-            <Typography variant='body1' align='center'>
-              {trailer_type}
-            </Typography>
-            <Typography variant='body1' align='center'>
-              {deck_dimensions}
-            </Typography>
-            <Typography variant='body1' align='center'>
-              {weight}
-            </Typography>
-            <Typography variant='body1' align='center'>
-              {price}
-            </Typography>
-          </Paper>
+        <Grid item>
+          <Grid
+            container
+            direction='column'
+            justify='center'
+            alignItems='center'
+          >
+            <Grid item>
+              <Typography variant='h6' align='center' color='textPrimary'>
+                Trailer Specific Information:
+              </Typography>
+            </Grid>
+
+            <Grid item>
+              <Typography variant='body1' align='center'>
+                {brand}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant='body1' align='center'>
+                {trailer_type} trailer
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant='body1' align='center'>
+                {deck_dimensions} (LxW)
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant='body1' align='center'>
+                {weight} lbs Max Weight Capacity
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant='body1' align='center'>
+                ${price}.00/day
+              </Typography>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </div>

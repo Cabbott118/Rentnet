@@ -8,20 +8,19 @@ import Button from '@material-ui/core/Button';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
+  imgContainer: {
+    backgroundColor: '#eee',
+    minHeight: '200px',
+    width: '100%',
+    borderRadius: '5px',
+  },
   imgButton: {
     textTransform: 'none',
     marginTop: 20,
     marginBottom: 10,
-    position: 'relative',
-  },
-  imgFileName: {
-    position: 'relative',
-    top: 5,
-    left: 10,
   },
   img: {
-    height: '150px',
-    display: 'table-row',
+    width: '150px',
   },
   button: {
     color: 'white',
@@ -49,21 +48,49 @@ const TrailerImageUpload = (props) => {
 
   return (
     <Container>
-      <Button
-        variant='contained'
-        component='label'
-        className={classes.imgButton}
+      <Grid
+        container
+        direction='column'
+        justify='center'
+        alignItems='flex-start'
       >
-        Upload Image
-        <input
-          type='file'
-          name='image'
-          onChange={handleImageChange}
-          style={{ display: 'none' }}
-        />
-      </Button>
-      <label className={classes.imgFileName}>{imgFileName}</label>
-      <img src={imgURL} alt='' className={classes.img} />
+        <Grid item className={classes.imgContainer}>
+          <Grid container direction='row' justify='center' alignItems='center'>
+            <Grid item>
+              <img src={imgURL} alt='' className={classes.img} />
+            </Grid>
+          </Grid>
+        </Grid>
+
+        <Grid item>
+          <Grid
+            container
+            direction='row'
+            justify='center'
+            alignItems='center'
+            spacing={2}
+          >
+            <Grid item>
+              <Button
+                variant='contained'
+                component='label'
+                className={classes.imgButton}
+              >
+                Upload Image
+                <input
+                  type='file'
+                  name='image'
+                  onChange={handleImageChange}
+                  style={{ display: 'none' }}
+                />
+              </Button>
+            </Grid>
+            <Grid item style={{ marginTop: '5px' }}>
+              <label>{imgFileName}</label>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
 
       <Grid container direction='row' justify='flex-end' alignItems='center'>
         <Button

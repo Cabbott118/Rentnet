@@ -30,6 +30,7 @@ const styles = (theme) => ({
   image: {
     height: '200px',
     width: '100%',
+    objectFit: 'cover',
     borderRadius: '5px',
   },
   bottomItem: {

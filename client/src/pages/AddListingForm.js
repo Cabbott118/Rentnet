@@ -212,7 +212,7 @@ export class AddListingForm extends Component {
     };
     this.props.addItem(newTrailer);
 
-    // window.location.href = '/success';
+    window.location.href = '/success';
   };
 
   render() {
@@ -240,13 +240,15 @@ export class AddListingForm extends Component {
     } else {
       return (
         <div className={classes.root}>
-          <Stepper activeStep={activeStep} alternativeLabel>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
+          <Container>
+            <Stepper activeStep={activeStep} alternativeLabel>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </Container>
 
           <Container>
             {activeStep === steps.length ? (
