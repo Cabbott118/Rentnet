@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 
 // Trailer Model
 const Trailer = require('../../models/Trailer');
+const Image = require('../../models/Image');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -44,21 +45,43 @@ router.get('/match/:_id', (req, res) => {
 // @desc   Create An Item
 // @access Private
 router.post('/', auth, (req, res) => {
-  const newTrailer = new Trailer({
-    brand: req.body.brand,
-    trailer_type: req.body.trailer_type,
-    deck_dimensions: req.body.deck_dimensions,
-    weight: req.body.weight,
-    price: req.body.price,
-    owner_id: req.body.owner_id,
-    trailer_address: req.body.trailer_address,
-    trailer_city: req.body.trailer_city,
-    trailer_zip: req.body.trailer_zip,
-    trailer_state: req.body.trailer_state,
-    currently_available: req.body.currently_available,
-    date: req.body.date,
+  let imageName = req.body.image_original;
+  Image.find({ originalname: imageName }).then((image) => {
+    const newTrailer = new Trailer({
+      img_path: image[0].path,
+      brand: req.body.brand,
+      trailer_type: req.body.trailer_type,
+      deck_dimensions: req.body.deck_dimensions,
+      weight: req.body.weight,
+      price: req.body.price,
+      owner_id: req.body.owner_id,
+      trailer_address: req.body.trailer_address,
+      trailer_city: req.body.trailer_city,
+      trailer_zip: req.body.trailer_zip,
+      trailer_state: req.body.trailer_state,
+      currently_available: req.body.currently_available,
+      date: req.body.date,
+    });
+    newTrailer.save().then((trailer) => res.json(trailer));
   });
-  newTrailer.save().then((trailers) => res.json(trailers));
+
+  // const newTrailer = new Trailer({
+  //   img_original: req.body.img_original,
+  //   brand: req.body.brand,
+  //   trailer_type: req.body.trailer_type,
+  //   deck_dimensions: req.body.deck_dimensions,
+  //   weight: req.body.weight,
+  //   price: req.body.price,
+  //   owner_id: req.body.owner_id,
+  //   trailer_address: req.body.trailer_address,
+  //   trailer_city: req.body.trailer_city,
+  //   trailer_zip: req.body.trailer_zip,
+  //   trailer_state: req.body.trailer_state,
+  //   currently_available: req.body.currently_available,
+  //   date: req.body.date,
+  // });
+  // console.log(newTrailer);
+  // newTrailer.save().then((trailer) => res.json(trailer));
 });
 
 // @route  PUT api/trailers

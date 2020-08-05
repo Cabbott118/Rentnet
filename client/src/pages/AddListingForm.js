@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import LoadingSpinner from '../components/LoadingSpinner';
+import TrailerImageUpload from '../components/TrailerImageUpload';
 import TrailerInformation from '../components/TrailerInformation';
 import TrailerLocationInformation from '../components/TrailerLocationInformation';
 import TrailerReviewDisplay from '../components/TrailerReviewDisplay';
@@ -19,6 +20,7 @@ import Grid from '@material-ui/core/Grid';
 // Redux
 import { connect } from 'react-redux';
 import { loadUser } from '../redux/actions/authActions';
+import { addImage, getImages } from '../redux/actions/imageActions';
 import { addItem } from '../redux/actions/itemActions';
 
 const styles = (theme) => ({
@@ -42,7 +44,7 @@ const styles = (theme) => ({
 });
 
 function getSteps() {
-  return ['Trailer Information', 'Pick Up & Drop Off'];
+  return ['Trailer Image ', 'Trailer Information', 'Pick Up & Drop Off'];
 }
 
 const steps = getSteps();
@@ -51,6 +53,9 @@ export class AddListingForm extends Component {
   state = {
     activeStep: 0,
     prevStep: null,
+    imgFileName: '',
+    selectedFile: null,
+    imgURL: null,
     brand: '',
     trailer_type: '',
     deck_dimensions: '',
@@ -91,6 +96,17 @@ export class AddListingForm extends Component {
     switch (stepIndex) {
       case 0:
         return (
+          <TrailerImageUpload
+            handleImageChange={this.handleImageChange}
+            imgFileName={this.state.imgFileName}
+            imgURL={this.state.imgURL}
+            handleBack={this.handleBack}
+            handleNext={this.handleNextFromImage}
+            activeStep={stepIndex}
+          />
+        );
+      case 1:
+        return (
           <TrailerInformation
             handleChange={this.handleChange}
             handleBack={this.handleBack}
@@ -99,7 +115,7 @@ export class AddListingForm extends Component {
             values={values}
           />
         );
-      case 1:
+      case 2:
         return (
           <TrailerLocationInformation
             handleChange={this.handleChange}
@@ -121,6 +137,27 @@ export class AddListingForm extends Component {
 
   handleChange = (input) => (e) => {
     this.setState({ [input]: e.target.value });
+  };
+
+  handleImageChange = (e) => {
+    console.log(e.target.files[0]);
+    this.setState({
+      imgFileName: e.target.files[0].name,
+      selectedFile: e.target.files[0],
+      imgURL: URL.createObjectURL(e.target.files[0]),
+    });
+  };
+
+  handleNextFromImage = () => {
+    const { prevStep, activeStep, selectedFile } = this.state;
+    const data = new FormData();
+    data.append('image', selectedFile);
+    this.props.addImage(data);
+
+    this.setState({
+      prevStep: prevStep + 1,
+      activeStep: activeStep + 1,
+    });
   };
 
   handleNext = () => {
@@ -148,6 +185,7 @@ export class AddListingForm extends Component {
     if (!_id) return null;
 
     const {
+      imgFileName,
       brand,
       trailer_type,
       deck_dimensions,
@@ -160,6 +198,7 @@ export class AddListingForm extends Component {
     } = this.state;
 
     const newTrailer = {
+      image_original: imgFileName,
       brand,
       trailer_type,
       deck_dimensions,
@@ -171,13 +210,13 @@ export class AddListingForm extends Component {
       trailer_zip,
       trailer_state,
     };
-
     this.props.addItem(newTrailer);
 
-    window.location.href = '/success';
+    // window.location.href = '/success';
   };
 
   render() {
+    console.log(this.props);
     const {
       activeStep,
       brand,
@@ -261,13 +300,19 @@ export class AddListingForm extends Component {
 AddListingForm.propTypes = {
   auth: PropTypes.object.isRequired,
   loadUser: PropTypes.func.isRequired,
+  addImage: PropTypes.func.isRequired,
+  getImages: PropTypes.func.isRequired,
   addItem: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   item: state.item,
+  image: state.image,
 });
-export default connect(mapStateToProps, { loadUser, addItem })(
-  withStyles(styles)(AddListingForm)
-);
+export default connect(mapStateToProps, {
+  loadUser,
+  addItem,
+  addImage,
+  getImages,
+})(withStyles(styles)(AddListingForm));

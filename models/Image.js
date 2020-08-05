@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const ImageSchema = new Schema({
-  trailer_id: {
-    type: String,
-    required: true,
+  trailer: {
+    type: Schema.Types.ObjectId,
+    ref: 'Trailer',
   },
   fieldname: {
     type: String,

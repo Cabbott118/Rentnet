@@ -19,7 +19,6 @@ const Image = require('../../models/Image');
 router.post('/', upload, (req, res) => {
   // TODO: Get trailer_id from req.body
   const newImage = new Image({
-    trailer_id,
     fieldname: req.file.fieldname,
     originalname: req.file.originalname,
     encoding: req.file.encoding,

@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 // Create Schema
 const TrailerSchema = new Schema({
   image: {
+    type: Schema.Types.ObjectId,
+    ref: 'Image',
+  },
+  img_path: {
     type: String,
     required: true,
   },

@@ -20,9 +20,6 @@ const styles = (theme) => ({
     marginRight: theme.spacing(1),
     textTransform: 'none',
   },
-  buttonGroup: {
-    backgroundColor: 'red',
-  },
 });
 
 const TrailerInformation = (props) => {

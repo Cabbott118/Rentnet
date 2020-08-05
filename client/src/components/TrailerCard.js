@@ -75,6 +75,7 @@ export class TrailerCard extends Component {
         {items.map(
           ({
             _id,
+            img_path,
             brand,
             trailer_type,
             trailer_city,
@@ -87,11 +88,7 @@ export class TrailerCard extends Component {
               <Paper variant='outlined' className={classes.trailerPaper}>
                 <Grid container>
                   <Grid item xs={12} md={4}>
-                    <img
-                      alt={brand}
-                      src='https://media.istockphoto.com/photos/new-cargo-cart-picture-id135449272'
-                      className={classes.image}
-                    />
+                    <img alt={brand} src={img_path} className={classes.image} />
                   </Grid>
                   <Grid item xs={12} md={8} style={{ padding: '1rem' }}>
                     <Grid
