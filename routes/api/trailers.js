@@ -64,24 +64,6 @@ router.post('/', auth, (req, res) => {
     });
     newTrailer.save().then((trailer) => res.json(trailer));
   });
-
-  // const newTrailer = new Trailer({
-  //   img_original: req.body.img_original,
-  //   brand: req.body.brand,
-  //   trailer_type: req.body.trailer_type,
-  //   deck_dimensions: req.body.deck_dimensions,
-  //   weight: req.body.weight,
-  //   price: req.body.price,
-  //   owner_id: req.body.owner_id,
-  //   trailer_address: req.body.trailer_address,
-  //   trailer_city: req.body.trailer_city,
-  //   trailer_zip: req.body.trailer_zip,
-  //   trailer_state: req.body.trailer_state,
-  //   currently_available: req.body.currently_available,
-  //   date: req.body.date,
-  // });
-  // console.log(newTrailer);
-  // newTrailer.save().then((trailer) => res.json(trailer));
 });
 
 // @route  PUT api/trailers

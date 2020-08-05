@@ -20,7 +20,8 @@ const styles = (theme) => ({
     marginBottom: 10,
   },
   img: {
-    width: '150px',
+    height: '200px',
+    maxWidth: '100%',
   },
   button: {
     color: 'white',
